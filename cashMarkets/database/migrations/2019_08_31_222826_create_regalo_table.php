@@ -18,7 +18,7 @@ class CreateRegaloTable extends Migration
             $table->integer('IDCL');
             $table->date('fecha');
             $table->float('precio',8,2);
-            $table->timestamps('create_at');
+            $table->timestamp('create_at');
         });
     }
 

@@ -25,8 +25,8 @@ class CreateProductsTable extends Migration
             $table->float('pricePurchase',8,2); 
             $table->float('priceSale',8,2); 
             $table->float('priceReservation',8,2); 
-            $table->int('productState'); 
-            $table->int('currentAgreement'); 
+            $table->integer('productState'); 
+            $table->integer('currentAgreement'); 
             $table->timestamp('modify_on');
         });
     }

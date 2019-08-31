@@ -17,7 +17,7 @@ class CreateEmployesTable extends Migration
             $table->bigIncrements('id');
             $table->string('user')->unique();
             $table->string('password');
-            $table->integer('privilegeLvel');
+            $table->integer('privilegeLevel');
             $table->rememberToken();
             $table->timestamps();
         });
