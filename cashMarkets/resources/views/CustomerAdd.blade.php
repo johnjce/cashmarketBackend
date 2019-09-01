@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('path')
+<b>Crear o Editar Cliente</b>
+@endsection
 @section('content')
 
 <div class="container-fluid">
@@ -11,17 +13,6 @@
 
     <div class="content-row">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title"><b>Crear/Editar Cliente</b>
-                </div>
-
-                <div class="panel-options">
-                    <a class="bg" data-target="#sample-modal-dialog-1" data-toggle="modal" href="#sample-modal"><i class="entypo-cog"></i></a>
-                    <a data-rel="collapse" href="#"><i class="entypo-down-open"></i></a>
-                    <a data-rel="close" href="#!/tasks" ui-sref="Tasks"><i class="entypo-cancel"></i></a>
-                </div>
-            </div>
-
             <div class="panel-body">
                 <form id="addCustomerForm" action="./" enctype="multipart/form-data">
 
