@@ -2,111 +2,153 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>CashMarkets V2.0</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
 
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="favicon_16.ico" />
-    <link rel="bookmark" href="favicon_16.ico" />
-    <!-- site css -->
-    <link rel="stylesheet" href="dist/css/site.min.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="dist/js/site.min.js"></script>
 
 </head>
 
-<body>
-    <!--nav-->
-    <nav role="navigation" class="navbar navbar-custom">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button data-target="#bs-content-row-navbar-collapse-5" data-toggle="collapse" class="navbar-toggle" type="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/home" class="navbar-brand">CashMarkets V2.0</a>
-            </div>
-            <div id="bs-content-row-navbar-collapse-5" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ ucfirst(Auth::user()->name) }}, {{ __('Salir') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <div class="container-fluid">
-        <!--documents-->
-        <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
-                <ul class="list-group panel">
-                    <li class="list-group-item"><i class="glyphicon glyphicon-align-justify"></i> <b>SIDE PANEL</b></li>
-                    <li class="list-group-item"><input type="text" class="form-control search-query" placeholder="Search Something"></li>
-                    <li class="list-group-item"><a href="/home"><i class="glyphicon glyphicon-home"></i>Dashboard </a></li>
-                    <li>
-                        <a href="#clients" class="list-group-item " data-toggle="collapse"><i class="glyphicon glyphicon-certificate"></i>Clientes<span class="glyphicon glyphicon-chevron-right"></span></a>
-                        <li class="collapse" id="clients">
-                            <a href="" class="list-group-item">Nuevo Cliente</a>
-                            <a href="" class="list-group-item">Ver cliente</a>
-                        </li>
-                    </li>
-                    <li>
-                        <a href="#agreement" class="list-group-item " data-toggle="collapse"><i class="glyphicon glyphicon-list-alt"></i>Contratos<span class="glyphicon glyphicon-chevron-right"></span></a>
-                        <li class="collapse" id="agreement">
-                            <a href="" class="list-group-item">Compras</a>
-                            <a href="" class="list-group-item">Depositos</a>
-                            <a href="" class="list-group-item">Empe&ntilde;s</a>
-                        </li>
-                    </li>
-                    <li>
-                        <a href="#lists" class="list-group-item " data-toggle="collapse"><i class="glyphicon glyphicon-th-list"></i>Listados<span class="glyphicon glyphicon-chevron-right"></span></a>
-                        <li class="collapse" id="lists">
-                            <a href="" class="list-group-item">Compras</a>
-                            <a href="" class="list-group-item">Depositos</a>
-                            <a href="" class="list-group-item">Empe&ntilde;s</a>
-                        </li>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-9 content">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><a href="javascript:void(0);" class="toggle-sidebar"><span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>..::jhonts Dashboard::..</h3>
-                    </div>
-                    <div class="panel-body">
-                        @yield('content')
-                    </div>
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="/home">CashMarkets V2.0</a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Navbar Search -->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
             </div>
+        </form>
+
+        <!-- Navbar -->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle fa-fw"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <!--<a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="#">Activity Log</a>-->
+                    <p class="dropdown-item" >Hola, {{ ucfirst(Auth::user()->name) }}.</p>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                         {{ __('Salir') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="customersDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Clientes</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="customersDropdown">
+                    <a class="dropdown-item" href="/customerAdd">Agregar usuario</a>
+                    <a class="dropdown-item" href="/customers">Ver usuarios</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="agreementsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Contratos</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="agreementsDropdown">
+                    <h6 class="dropdown-header">Formularios:</h6>
+                    <a class="dropdown-item" href="newPurchase">Compra</a>
+                    <a class="dropdown-item" href="new">Deposito</a>
+                    <a class="dropdown-item" href="new">Empeño</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="listsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Listados</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="listsDropdown">
+                    <h6 class="dropdown-header">Listados:</h6>
+                    <a class="dropdown-item" href="listPurchases">Compra</a>
+                    <a class="dropdown-item" href="new">Deposito</a>
+                    <a class="dropdown-item" href="new">Empeño</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">@yield('path')</li>
+            </ol>
+            @yield('content')
         </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
 </body>
 
 </html>
