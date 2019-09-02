@@ -7,10 +7,22 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: ["Blue", "Red", "Yellow", "Green"],
+    labels: [ "Compra €", "Empeño €", "Deposito €" ],
     datasets: [{
-      data: [12.21, 15.58, 11.25, 8.32],
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+      data: [1500, 650, 300],
+      backgroundColor: ['#007bff','#ffc107', '#28a745'],
+    }],
+  },
+});
+// Pie Chart Example
+var ctx = document.getElementById("myPieChart2");
+var myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [ "Facturas €", "Pendiente €", "Tickets €" ],
+    datasets: [{
+      data: [455, 1440, 8300],
+      backgroundColor: ['#28a745','#ffc107', '#12cc12'],
     }],
   },
 });
