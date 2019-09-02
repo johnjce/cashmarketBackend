@@ -87,8 +87,8 @@
                     <span>Clientes</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="customersDropdown">
-                    <a class="dropdown-item" href="/customerAdd">Agregar usuario</a>
-                    <a class="dropdown-item" href="/customers">Ver usuarios</a>
+                    <a class="dropdown-item" href="/customerAdd">Agregar cliente</a>
+                    <a class="dropdown-item" href="/customers">Ver clientes</a>
                 </div>
             </li>
 
@@ -140,11 +140,7 @@
 
     <script src="vendor/chart.js/Chart.min.js"></script>
     @yield('scripts')
-    <!-- Page level plugin JavaScript
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-<script src="js/demo/datatables-demo.js"></script>
--->
+    
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
