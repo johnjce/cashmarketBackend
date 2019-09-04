@@ -41,12 +41,12 @@
                     </span>
 
                     <div class="wrap-input100 validate-input m-b-10" data-validate="Username is required">
-                        <input id="user" type="text" class="input100 form-control @error('user') is-invalid @enderror" name="user" value="{{ old('user') }}" required autocomplete="user" autofocus>
+                        <input id="name" type="text" class="input100 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-name"></i>
                         </span>
-                        @error('user')
+                        @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -21,9 +21,9 @@ class CreateCustomersTable extends Migration
             $table->string('lastname');
             $table->integer('telephone');
             $table->string('email');
-            $table->binary('img_dni'); 
+            $table->binary('img_dni')->nullable(); 
             $table->string('address'); 
-            $table->binary('signaturePicture'); 
+            $table->binary('signaturePicture')->nullable(); 
             $table->timestamp('modify_on');
         });
     }
