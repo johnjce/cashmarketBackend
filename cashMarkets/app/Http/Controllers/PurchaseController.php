@@ -8,6 +8,10 @@ class PurchaseController extends Controller
 {
     //
     public function newPurchase(){
-        return view('Purchase');
+        return view('newPurchase');
+    }
+
+    public function purchaseList(){
+        return view('PurchaseList');
     }
 }

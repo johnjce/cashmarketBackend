@@ -7,7 +7,7 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: [ "Compra €", "Empeño €", "Deposito €" ],
+    labels: [ "Compra €", "Empeño €", "Depósito €" ],
     datasets: [{
       data: [1500, 650, 300],
       backgroundColor: ['#007bff','#ffc107', '#28a745'],

@@ -100,8 +100,8 @@
                 <div class="dropdown-menu" aria-labelledby="agreementsDropdown">
                     <h6 class="dropdown-header">Formularios:</h6>
                     <a class="dropdown-item" href="newPurchase">Compra</a>
-                    <a class="dropdown-item" href="new">Deposito</a>
-                    <a class="dropdown-item" href="new">Empeño</a>
+                    <a class="dropdown-item" href="newDownPayment">Depósito</a>
+                    <a class="dropdown-item" href="newPawn">Empeño</a>
                 </div>
             </li>
 
@@ -112,9 +112,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="listsDropdown">
                     <h6 class="dropdown-header">Listados:</h6>
-                    <a class="dropdown-item" href="listPurchases">Compra</a>
-                    <a class="dropdown-item" href="new">Deposito</a>
-                    <a class="dropdown-item" href="new">Empeño</a>
+                    <a class="dropdown-item" href="PurchaseList">Compra</a>
+                    <a class="dropdown-item" href="DownPaymentList">Depósito</a>
+                    <a class="dropdown-item" href="PawnList">Empeño</a>
                 </div>
             </li>
         </ul>
