@@ -15,7 +15,6 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('IDCL');
-            $table->timestamp('registerDate');
             $table->string('dni');
             $table->string('names');
             $table->string('lastname');
@@ -24,7 +23,8 @@ class CreateCustomersTable extends Migration
             $table->binary('img_dni')->nullable(); 
             $table->string('address'); 
             $table->binary('signaturePicture')->nullable(); 
-            $table->timestamp('modify_on');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 

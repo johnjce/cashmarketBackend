@@ -17,7 +17,8 @@ class CreateProducttypesTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->string('comment');
-            $table->timestamp('create_at');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 

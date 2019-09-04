@@ -22,7 +22,8 @@ class CreateEmpenosTable extends Migration
             $table->string('comentario');
             $table->date('fechalimite');
             $table->string('tipo');
-            $table->timestamp('added_on');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
             $table->timestamp('modify_on');
         });
     }

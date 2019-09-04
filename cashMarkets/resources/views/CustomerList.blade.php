@@ -47,7 +47,7 @@
                             <td>{{ $customer->dni }}</td>
                             <td>{{ $customer->telephone }}</td>
                             <td>{{ $customer->address }}</td>
-                            <td>{{ date('d-m-Y', strtotime($customer->registerDate)) }}</td>
+                            <td>{{ date('d-m-Y', strtotime($customer->created_at)) }}</td>
                             <td><a href="/{{ $customer->IDCL }}/customer">Ver cliente</a></td>
                         </tr>
                         @endforeach

@@ -24,5 +24,6 @@ Auth::routes();
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/customerAdd', 'CustomerController@index')->name('CustomerAdd');
+Route::get('/customerAdd', 'CustomerController@index')->name('CustomerForm');
+Route::post('/customerAdd', 'CustomerController@save')->name('CustomerAdd');
 Route::get('/customers', 'CustomerController@seeCustomers')->name('customerList');

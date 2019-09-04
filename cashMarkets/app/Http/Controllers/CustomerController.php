@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Input;
+use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends Controller
 {
@@ -31,49 +33,26 @@ class CustomerController extends Controller
         $customers = Customer::all();
         return view('CustomerList',compact('customers'));
     }
-    public function save(){
-        $customers=new CustomersModel($this->adapter);
-        $customer=new Customer($this->adapter);
-        $customer->setDni($_POST['dni']);
-        $customer->setName($_POST['names']);
-        $customer->setLastname($_POST['lastname']);
-        $customer->setAddress($_POST['address']);
-        $customer->setTelephone($_POST['telephone']);
-        $customer->setEmail($_POST['email']);
-        $customer->setDni($_POST['dni']);
-        $customer->setImgDni($_POST['img_dni']);
-        $customer->setSignaturePicture($_POST['signaturePicture']);
-        if(!isset($_POST["id"]) || $_POST["id"] == "")
-            return $customers->addCustomer($customer);
-        else {
-            $customer->setId($_POST['id']);
-            return $customers->updateCustomer($customer);
+
+    public function save(Request $request){
+        if($request->ajax()) {
+            $customer = new Customer();
+            foreach ($request->all() as $variable => $value) {
+                if($variable == 'img_dni')$customer->img_dni=rawurldecode($value);
+                if($variable != 'IDCL' && $variable != 'img_dni' && $variable != 'signaturePicture'){
+                    $customer->$variable = $value;
+                }
+            }
+            $customer->save();
+            return "Guardado";
         }
+        return "Error: no puede guardar imagenes";
     }
 
-    public function getCustomerById(){
-        if(isset($_POST['id']) && $_POST['id'] != ""){
-            $customer=new Customer($this->adapter);
-            return $customer->getById($_POST['id']);
-        }
+    public function getCustomerById($id){
+        return Customer::where('IDCL',$id)->first();
     }
     
-    public function delCustomer(){ 
-        //editar
-        if(isset($_GET["id"])){ 
-            $id=(int)$_GET["id"];    
-            $customer=new Customer($this->adapter);
-            if($customer->deleteById($id)){
-                $this->redirect();
-            }else{
-                echo "Error: NO se borr&oacute;, Revise si tiene contratos o productos relacionados e intentelo de nuevo.";
-            }
-        }else{
-            echo "Error: es necesario un ID de customere para borrar.";
-        }
-    }
-
-
 
     public function createCustomer(){
         $this->view("addCustomer",null);
