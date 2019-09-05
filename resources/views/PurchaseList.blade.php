@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('path')
-<b>Listado de empeños</b>
+<b>Listado de compras</b>
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -1015,5 +1015,5 @@
 <!-- Page level plugin JavaScript-->
 <script src="vendor/datatables/jquery.dataTables.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-<script src="js/demo/datatables-demo.js"></script>
+<script src="js/backGeneral/tables/datatables-demo.js"></script>
 @endsection

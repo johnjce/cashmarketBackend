@@ -19,7 +19,7 @@
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/backGeneral/sb-admin.css" rel="stylesheet">
 
 
 </head>
@@ -143,7 +143,7 @@
     
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+    <script src="js/backGeneral/sb-admin.min.js"></script>
 </body>
 
 </html>

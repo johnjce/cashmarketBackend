@@ -60,6 +60,6 @@
 @endsection
 
 @section('scripts')
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/backGeneral/charts/chart-area.js"></script>
+<script src="js/backGeneral/charts/chart-pie.js"></script>
 @endsection

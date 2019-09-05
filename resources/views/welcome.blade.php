@@ -11,15 +11,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oxygen:400,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?php echo asset('css/animate.css') ?>">
-    <link rel="stylesheet" href="<?php echo asset('css/owl.carousel.min.css') ?>">
-    <link rel="stylesheet" href="<?php echo asset('css/jquery.fancybox.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo asset('css/frontGeneral/animate.css') ?>">
+    <link rel="stylesheet" href="<?php echo asset('css/frontGeneral/owl.carousel.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo asset('css/frontGeneral/jquery.fancybox.min.css') ?>">
 
     <link rel="stylesheet" href="<?php echo asset('fonts/ionicons/css/ionicons.min.css') ?>">
     <link rel="stylesheet" href="<?php echo asset('fonts/fontawesome/css/font-awesome.min.css') ?>">
 
     <!-- Theme Style -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/frontGeneral/style.css') }}">
 </head>
 
 <body>
@@ -132,15 +132,13 @@
     </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
+    <script src="js/frontGeneral/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="js/main.js"></script>
-
+    <script src="js/frontGeneral/owl.carousel.min.js"></script>
+    <script src="js/frontGeneral/jquery.waypoints.min.js"></script>
+    <script src="js/frontGeneral/jquery.fancybox.min.js"></script>
+    <script src="js/frontGeneral/main.js"></script>
+    
 </body>
 
 </html>
