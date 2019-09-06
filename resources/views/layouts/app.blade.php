@@ -20,8 +20,6 @@
 
     <!-- Custom styles for this template-->
     <link href="css/backGeneral/sb-admin.css" rel="stylesheet">
-
-
 </head>
 
 <body id="page-top">
@@ -140,7 +138,7 @@
 
     <script src="vendor/chart.js/Chart.min.js"></script>
     @yield('scripts')
-    
+
 
     <!-- Custom scripts for all pages-->
     <script src="js/backGeneral/sb-admin.min.js"></script>

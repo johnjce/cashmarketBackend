@@ -13,7 +13,7 @@
     <div class="col mb-0">
         <div class="card-body">
             <div id="customer-search-input">
-                <div class="input-group col-md-12">
+                <div class="input-group col-12">
                     <input type="text" id="inputSearch" class="search-query form-control" placeholder="Buscar Cliente">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="button">
@@ -27,7 +27,8 @@
     </div>
 
 
-    <form id="addProductForm" name="addProductForm" action="./index.php?controller=Purchase&amp;action=save" enctype="multipart/form-data">
+    <form id="addProductForm" name="addProductForm" action="./savePurchase" method="post">
+    @csrf
         <div class="row">
             <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-6">
                 <label for="make">Marca (*)</label>
@@ -53,8 +54,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <div class="row">
             <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-6">
@@ -76,32 +75,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-angle-double-down"></i></span>
                     </div>
-                    <select name="type" class="form-control">
-                        <option value="1" title="Altavoces para automóvil, Autoradios...">Accesorios Coche</option>
-                        <option value="2" title="Cascos de motocicleta, Ropa y calzado de moto...">Accesorios Moto</option>
-                        <option value="3" title="Alimentación bebé, Artículos de paseo bebé...">Bebé</option>
-                        <option value="4" title="Bicicleta Mountain bike, Bicicletas BMX Freestyle y Trial...">Bicicletas</option>
-                        <option value="5" title="Equipos de medición-detección, Herramientas a batería...">Bricolaje</option>
-                        <option value="6" title="Bisutería, Bolsos y monederos...">Complementos Y Artículos De Viaje</option>
-                        <option value="7" title="Artículos de pesca, Fitness...">Deportes</option>
-                        <option value="8" title="Plumas estilográficas, Bolígrafos...">Escritura</option>
-                        <option value="9" title="Cámaras clásicas, Cámaras digitales compactas...">Fotografía</option>
-                        <option value="10" title="Alianzas, Anillos con brillantes...">Joyería</option>
-                        <option value="11" title="Coches de colección, Juegos de mesa...">Juguetes</option>
-                        <option value="12" title="Alcatel, Blackberry, Iphone, Samsung...">Móviles Y Smartphones</option>
-                        <option value="13" title="Relojes de lujo, Relojes de caballero...">Relojes</option>
-                        <option value="14" title="Altavoces, Cadena musical...">Sonido</option>
-                        <option value="15" title="Videocámaras con disco duro, Videocámaras con DVD...">Videocámaras</option>
-                        <option value="16" title="Consolas, Videojuegos...">Videojuegos Y Consolas</option>
-                        <option value="17" title="Artículos de menaje, Aspiradoras y vaporettas">Hogar Y Decoración</option>
-                        <option value="18" title="Televisores, Reproductores DVD, Blu ray, VHS">Imagen</option>
-                        <option value="19" title="Ordenadores de sobremesa, Ordenadores portátiles">Informática</option>
-                        <option value="20" title="Amplificadores, Bajos y guitarras eléctricas">Instrumentos Musicales</option>
+                    <select name='type' name="type" class="form-control">
+                        @foreach($productTypes as $productType)
+                        <option value='{{ $productType->id }}' title='{{ $productType->comment }}'>{{ ucwords(strtolower($productType->type)) }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
-
-
         </div>
         <div class="row">
             <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-3">
@@ -194,5 +174,6 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('js/backGeneral/customer/customer.js')}}" defer></script>
+<script src="{{ asset('js/backGeneral/customer/agreementPurchase.js') }}" defer></script>
+<script src="{{ asset('js/backGeneral/customer/customerSearch.js') }}" defer></script>
 @endsection
