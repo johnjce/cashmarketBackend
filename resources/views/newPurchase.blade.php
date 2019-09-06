@@ -174,6 +174,6 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('js/backGeneral/customer/agreementPurchase.js') }}" defer></script>
 <script src="{{ asset('js/backGeneral/customer/customerSearch.js') }}" defer></script>
+<script src="{{ asset('js/backGeneral/customer/agreementPurchase.js') }}" defer></script>
 @endsection

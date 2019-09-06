@@ -85,13 +85,14 @@ document.querySelector("#buttonAddAgreement").addEventListener("click", function
     postProducts = postProducts.substring(0, postProducts.length - 1);
     postProducts += "}";
 
-    var posting = $.post("./savePurchase", { "products": jQuery.parseJSON(postProducts), "IDCL": $("#IDCL").val() });
+    var posting = $.post("./savePurchase", { "products": jQuery.parseJSON(postProducts), "IDCL": $("#IDCL").val(), "total":145 });
     posting.done(function (data) {
         $("#inputSearch").val("");
         document.querySelector('#customersResult').innerHTML = "";
         agreementPurchase = new Map();
         postProducts = "{";
         disableSubmit("#buttonAddAgreement");
+        $("#inputSearch").val().trigger('change');
         document.querySelector('#message').innerHTML ="ok";
     });
     posting.fail(function (data) {

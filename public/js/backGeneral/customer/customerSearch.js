@@ -1,16 +1,11 @@
-$("#inputSearch").on("keyup", function () {
+$("#inputSearch").on("change paste keyup", function () {
     var value = $("#inputSearch").val();
-    var posting = $.post("./index.php?controller=Customer&action=search", { "value": value });
+    var posting = $.post("./customerSearch", { "q": value });
     posting.done(function (data) {
         var jdata = JSON.parse(data);
-        if (jdata.names != null) {
-            document.querySelector('#customersResult').innerHTML = jdata.names + " " + jdata.lastname + "-" + jdata.dni;
-            document.querySelector('#customersResult').innerHTML += "<input type=\"hidden\" id=\"IDCL\" value=\"" + jdata.IDCL + "\"/>";
-            return;
-        }
         var x = "";
         for (i in jdata) {
-            x += jdata[i].names + " " + jdata[i].lastname + "-" + jdata[i].dni + "<br/>";
+            x += "<a onclick=$('#inputSearch').val(\"" + jdata[i].dni + "\").trigger('change') class='customerResultLabel'>" + jdata[i].names + " " + jdata[i].lastname + "-" + jdata[i].dni + '</a>' + "<br/>"+"<input type=\"hidden\" id=\"IDCL\" value=\"" + jdata[i].IDCL + "\"/>";
         }
         document.querySelector('#customersResult').innerHTML = x;
     });
