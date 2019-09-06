@@ -67,10 +67,15 @@ class CustomerController extends Controller
         ));
     }
 
-    public function search(){
-        $customers=new CustomersModel($this->adapter);
-        $customerResult = $customers->search($_POST['value']);
-        echo json_encode($customerResult);
+    public function customerSearch(Request $keyWord){
+        return json_encode(Customer::where('IDCL','like','%'.$keyWord->q.'%')
+                 ->orWhere('names','like','%'.$keyWord->q.'%')
+                 ->orWhere('lastname','like','%'.$keyWord->q.'%')
+                 ->orWhere('telephone','like','%'.$keyWord->q.'%')
+                 ->orWhere('email','like','%'.$keyWord->q.'%')
+                 ->orWhere('address','like','%'.$keyWord->q.'%')
+                 ->orWhere('dni','like','%'.$keyWord->q.'%')
+                 ->get());
     }
     
     public function userPerMonth(){
