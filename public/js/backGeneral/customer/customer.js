@@ -14,8 +14,8 @@ function _getUserMedia() {
 }
 
 let video = document.querySelector("#video"),
-    canvas = document.querySelector("#canvas"),
-    signaturePictureCanvas = document.querySelector("#signaturePictureCanvas"),
+    canvasDni = document.querySelector("#canvasDni"),
+    signaturePictureCanvas = document.querySelector("#signatureImage"),
     buttonCapture = document.querySelector("#buttonCapture"),
     state = document.querySelector("#state"),
     deviceList = document.querySelector("#deviceList");
@@ -46,10 +46,12 @@ let setDeviceList = () => {
 
 function enableSubmit() {
     $("#buttonCapture").removeAttr("disabled");
+    $("#signButton").removeAttr("disabled");
 }
 
 function disableSubmit() {
     $("#buttonCapture").attr("disabled", "disabled");
+    $("#signButton").attr("disabled", "disabled");
 }
 
 function checkInput(idInput) {
@@ -127,12 +129,12 @@ function checkInput(idInput) {
                 buttonCapture.addEventListener("click", function () {
                     event.preventDefault();
                     video.pause();
-                    let contexto = canvas.getContext("2d");
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    let dniPicture = canvas.toDataURL();
-                    let signaturePicture = null // signaturePictureCanvas.toDataURL();
+                    let contexto = canvasDni.getContext("2d");
+                    canvasDni.width = video.videoWidth;
+                    canvasDni.height = video.videoHeight;
+                    contexto.drawImage(video, 0, 0, canvasDni.width, canvasDni.height);
+                    let dniPicture = canvasDni.toDataURL();
+                    let signaturePicture = signaturePictureCanvas.toDataURL();
 
                     $("#state").text("Guardando. Por favor, espera...");
                     let email = "Sin email";
@@ -146,8 +148,12 @@ function checkInput(idInput) {
                         "address": $("#address").val(),
                         "email": email,
                         "img_dni": encodeURIComponent(dniPicture),
-                        "signaturePicture": null//encodeURIComponent(signaturePicture)
+                        "signaturePicture": encodeURIComponent(signaturePicture)
                     };
+
+                    alert(signaturePicture);
+                    alert(dniPicture);
+
                     
                     $.ajax({
                         url: "./customerAdd",
