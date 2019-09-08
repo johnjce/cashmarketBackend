@@ -194,25 +194,25 @@ $("#buttonAddAgreement").click(function () {
             "                        <th>Cantidad</th>" +
             "                        <th>Total</th>" +
             "                    </tr>";
-            let total=0;
-            for (var [key, product] of agreementPurchase) {
-                i=key+1;
-                documento +="    <tr><td>"+ i +"</td>";
-                    documento +=     "<td>" + agreementPurchase.get(key).get("make") + "</td>";
-                    documento +=     "<td>" + agreementPurchase.get(key).get("model") + "</td>";
-                    documento +=     "<td>" + agreementPurchase.get(key).get("sn") + "</td>";
-                    let state = agreementPurchase.get(key).get("state")==1?"Nuevo":"Segundamano";
-                    documento +=     "<td>" + state + "</td>";
-                    documento +=     "<td>" + agreementPurchase.get(key).get("pricePurchase") + "</td>";
-                    documento +=     "<td>" + agreementPurchase.get(key).get("stock") + "</td>";
-                    let productPrice = agreementPurchase.get(key).get("stock")*agreementPurchase.get(key).get("pricePurchase");
-                    documento +=     "<td>" + productPrice + "</td>";
-                    total += productPrice;
-                document += "       </tr>";
-            }
-        documento += 
+        let total = 0;
+        for (var [key, product] of agreementPurchase) {
+            i = key + 1;
+            documento += "    <tr><td>" + i + "</td>";
+            documento += "<td>" + agreementPurchase.get(key).get("make") + "</td>";
+            documento += "<td>" + agreementPurchase.get(key).get("model") + "</td>";
+            documento += "<td>" + agreementPurchase.get(key).get("sn") + "</td>";
+            let state = agreementPurchase.get(key).get("state") == 1 ? "Nuevo" : "Segundamano";
+            documento += "<td>" + state + "</td>";
+            documento += "<td>" + agreementPurchase.get(key).get("pricePurchase") + "</td>";
+            documento += "<td>" + agreementPurchase.get(key).get("stock") + "</td>";
+            let productPrice = agreementPurchase.get(key).get("stock") * agreementPurchase.get(key).get("pricePurchase");
+            documento += "<td>" + productPrice + "</td>";
+            total += productPrice;
+            document += "       </tr>";
+        }
+        documento +=
             "                </table>" +
-            "                <br />(bienes objeto del contrato), por t&iacute;tulo de compraventa, por el cual se pagara la suma total de <strong>" + total +"&euro;</strong></p>" +
+            "                <br />(bienes objeto del contrato), por t&iacute;tulo de compraventa, por el cual se pagara la suma total de <strong>" + total + "&euro;</strong></p>" +
             "        <p><span class='tex-parrafo2'>II.- </span>Que Don <strong>Cash Market </strong> tiene inter&eacute;s en adquirir los bienes descritos en el ordinal precedente.</p>" +
             "        <p><span class='tex-parrafo2'>III.- </span>Que por ello ambas partes,</p>" +
             "        <p><strong>ACUERDAN </strong></p>" +
@@ -220,15 +220,31 @@ $("#buttonAddAgreement").click(function () {
             "        <p>Firmando en conformidad.</p>" +
             "        <p>&nbsp;</p>" +
             "        <p>&nbsp;</p>" +
-            "        <!--meter api de firma" +
-            "        <p><img src='{{ $purchase->signaturePicture }}' height='100px' height='50px' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<img src='./views/assets/img/firmaFernando.png' height='100px' height='50px' /></p>" +
-            "        --><p>Parte vendedora&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parte compradora </p>" +
-            "    </div>"+
 
-        "    <div class='modal-footer'>" +
+            "<div class='row'>" +
+            "   <div class='col-md-6'>"+
+            "       <div id='signatureDiv'>"+
+            "           Firma" + names + ":<br />"+
+            "           <img id='signatureImage' src='#' />"+
+            "       </div>"+
+            "   </div>"+
+            "   <div class='col-md-6'>"+
+            "       <div id='signatureDiv'>"+
+            "           Firma Fernando Gonzalez:<br />"+
+            "           <img src='img/firmaFernando.png' height='100px' height='50px' /></p>" +
+            "       </div>"+
+            "   </div>"+
+            "</div>"+
+            "    </div>" +
+
+            "    <div class='modal-footer'>" +
             "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
             "    <!-- boton de capturar firma -->" +
             "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument()'>Imprimir</a>" +
+            '<div class="row">' +
+            '<div class="col-md-6">' +
+            '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
+            '</div>' +
             "</div>";
         console.log(agreementPurchase);
         document.querySelector('#modalAgreementsContent').innerHTML = documento;
