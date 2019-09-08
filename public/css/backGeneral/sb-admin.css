@@ -10935,3 +10935,14 @@ body.sidebar-toggled footer.sticky-footer {
   font-size: 14px;
   border-left: inset;
 }
+
+#agreementLogo{
+  font-size: 50px;
+  color: rgba(212, 0, 255, 1);
+}
+.cLogo{
+  color:rgba(212, 0, 255, 1);
+}
+.mLogo{
+  color:black;
+}

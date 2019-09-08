@@ -18,10 +18,11 @@ class PurchaseController extends Controller {
     }
 
     public function purchaseAdd(Request $request) {
+       //dd($request->IDCL);
         if ($request->ajax()) {
-            $idAgreement = addAgreement($request->IDCL, $request->total, 500);
+            $idAgreement = $this->addAgreement($request->IDCL, $request->total, "compra");
             foreach ($request->products as $rows) { 
-                addProduct($idAgreement, $rows, 100);
+                $this->addProduct($idAgreement, $rows, 100);
             }
             return "Guardado";
         }
@@ -29,6 +30,7 @@ class PurchaseController extends Controller {
     }
 
     public function addAgreement($IDCL, $total,$typeDocument) {
+        //dd($IDCL);
         $agreement = new Lrvd();
         $agreement->IDCL = $IDCL;
         $agreement->amount = $total;
@@ -45,6 +47,9 @@ class PurchaseController extends Controller {
                 $purchase->productState = $valor;
                 $purchase->currentAgreement = $idAgreement;
                 $valor = $state;
+            }
+            if ($campo == "productImage") {
+                $valor = urldecode($valor);
             }
             $purchase->$campo = $valor;
         }

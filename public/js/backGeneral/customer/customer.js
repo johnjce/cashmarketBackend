@@ -15,7 +15,7 @@ function _getUserMedia() {
 
 let video = document.querySelector("#video"),
     canvasDni = document.querySelector("#canvasDni"),
-    signaturePictureCanvas = document.querySelector("#signatureImage"),
+    //signaturePictureCanvas = document.querySelector("#signatureImage"),
     buttonCapture = document.querySelector("#buttonCapture"),
     state = document.querySelector("#state"),
     deviceList = document.querySelector("#deviceList");
@@ -134,7 +134,7 @@ function checkInput(idInput) {
                     canvasDni.height = video.videoHeight;
                     contexto.drawImage(video, 0, 0, canvasDni.width, canvasDni.height);
                     let dniPicture = canvasDni.toDataURL();
-                    let signaturePicture = signaturePictureCanvas.toDataURL();
+                   // let signaturePicture = signaturePictureCanvas.toDataURL();
 
                     $("#state").text("Guardando. Por favor, espera...");
                     let email = "Sin email";
@@ -148,13 +148,9 @@ function checkInput(idInput) {
                         "address": $("#address").val(),
                         "email": email,
                         "img_dni": encodeURIComponent(dniPicture),
-                        "signaturePicture": encodeURIComponent(signaturePicture)
+                        "signaturePicture":null// encodeURIComponent(signaturePicture)
                     };
 
-                    alert(signaturePicture);
-                    alert(dniPicture);
-
-                    
                     $.ajax({
                         url: "./customerAdd",
                         type: "post",

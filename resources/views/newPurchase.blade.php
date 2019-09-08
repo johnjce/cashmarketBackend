@@ -28,9 +28,9 @@
 
 
     <form id="addProductForm" name="addProductForm" action="./savePurchase" method="post">
-    @csrf
+        @csrf
         <div class="row">
-            <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-6">
+            <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-4">
                 <label for="make">Marca (*)</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-6">
+            <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-3">
                 <label for="model">Modelo (*)</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -54,9 +54,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-6">
+            <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-3">
                 <label for="sn">Número de serie (*)</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -69,7 +67,50 @@
                 </div>
             </div>
 
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-4">
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-2">
+                <label for="pricePurchase">Precio de compra(*)</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
+                    </div>
+                    <input type="number" name="pricePurchase" id="pricePurchase" value="" class="form-control" placeholder="Precio de compra" required="">
+                    <div class="invalid-feedback" style="width: 100%;">
+                        Precio de compra requerido.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-4 text-center">
+                <video muted="muted" id="video"></video>
+                <canvas id="canvasproducPicture" style="display: none;"></canvas>
+                <br />
+                <select name="deviceList" id="deviceList"></select>
+            </div>
+
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-2">
+                <label for="priceSale">Precio de venta(*)</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
+                    </div>
+                    <input type="number" name="priceSale" id="priceSale" value="" class="form-control" placeholder="Precio de venta" required="">
+                    <div class="invalid-feedback" style="width: 100%;">
+                        Precio de venta requerido.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-2">
+                <label for="stock">cantidad</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
+                    </div>
+                    <input type="number" name="stock" id="stock" value="1" class="form-control" placeholder="Número de serie" required="">
+                </div>
+            </div>
+
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-2">
                 <label for="sn">Tipo de producto (*)</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -82,42 +123,8 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-3">
-                <label for="pricePurchase">Precio de compra(*)</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
-                    </div>
-                    <input type="number" name="pricePurchase" id="pricePurchase" value="" class="form-control" placeholder="Precio de compra" required="">
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Precio de compra requerido.
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-3">
-                <label for="priceSale">Precio de venta(*)</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
-                    </div>
-                    <input type="number" name="priceSale" id="priceSale" value="" class="form-control" placeholder="Precio de venta" required="">
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Precio de venta requerido.
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-3">
-                <label for="stock">cantidad</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
-                    </div>
-                    <input type="number" name="stock" id="stock" value="1" class="form-control" placeholder="Número de serie" required="">
-                </div>
-            </div>
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-3">
+
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-2">
                 <label for="state">Estado de producto</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -129,17 +136,11 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-6 text-right">
                 <div>
                     <button id="buttonAddProduct" class="btn btn-primary btn-lg" disabled="">Agregar <i class="fas fa-shopping-cart"></i></button>
                     <p id="message">Los campos marcados con (*) significan que son obligatorios.</p>
-                </div>
-            </div>
-            <div class="col-12 mb-3 col-sm-12 col-md-6 col-lg-6">
-                <div>
-                    <button id="buttonAddAgreement" class="btn btn-primary btn-lg" disabled="">Crear contrato <i class="fas fa-file-contract"></i></button>
                 </div>
             </div>
         </div>
@@ -171,7 +172,16 @@
             </div>
         </div>
     </div>
+    <div class="row">
+
+        <div class="col-12 mb-3 col-sm-12 col-md-12 col-lg-12 text-center">
+            <div>
+                <button id="buttonAddAgreement" class="btn btn-primary btn-lg" disabled="">Crear contrato <i class="fas fa-file-contract"></i></button>
+            </div>
+        </div>
+    </div>
 </div>
+@include('modals.agreementPurchase')
 @endsection
 @section('scripts')
 <script src="{{ asset('js/backGeneral/customer/customerSearch.js') }}" defer></script>
