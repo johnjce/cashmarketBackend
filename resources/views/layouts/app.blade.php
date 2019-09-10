@@ -151,7 +151,7 @@
 
 
     <!-- Custom scripts for all pages-->
-    <script src="js/backGeneral/sb-admin.min.js"></script>
+    <script src="js/backGeneral/sb-admin.js"></script>
     <script>
         $(function() {
             // bind change event to select

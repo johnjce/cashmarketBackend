@@ -6,6 +6,7 @@ use App\Lrvd;
 use App\Product;
 use App\Producttype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller {
     public function newPurchase() {
@@ -14,7 +15,14 @@ class PurchaseController extends Controller {
     }
 
     public function purchaseList() {
-        return view('PurchaseList');
+        //dd("para en dd");
+        $purchases = DB::table('lrvds')
+            ->join('customers', 'customers.IDCL', '=', 'lrvds.IDCL')
+            //->join('products', 'products.currentAgreement', '=', 'lrvds.id')
+            ->where("lrvds.typeDocument","=","compra")
+            ->select('customers.names', 'customers.lastname','customers.dni','lrvds.created_at', 'lrvds.documentId')
+            ->paginate(15);
+        return view('PurchaseList', compact('purchases'));
     }
 
     public function purchaseAdd(Request $request) {

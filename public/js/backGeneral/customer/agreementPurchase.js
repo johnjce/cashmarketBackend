@@ -112,7 +112,6 @@ $("#buttonAddAgreement").click(function () {
         address = jdata[0].address;
         dni = jdata[0].dni;
         telephone = jdata[0].telephone;
-
     });
 
     agreementPurchase.forEach(toString);
@@ -143,10 +142,10 @@ $("#buttonAddAgreement").click(function () {
             "            <span aria-hidden='true'>×</span>" +
             "        </button>" +
             "    </div>" +
-            "    <div class='modal-body' id='Agreement{{ $purchase->documentoId }}'>" +
+            "    <div class='modal-body' id='AgreementContrato'>" +
             "        <a class='sidebar-brand d-flex paddingModal' href='index.php' id='agreementLogo'>" +
             "            <div class='sidebar-brand-icon rotate-n-15'>" +
-            "                <i class='fas fa-laugh-wink cLogo '></i>" +
+            "                <img src='/img/logo.png' class='img-responsive my-2 mx-2' width='60px' height='60px'/>" +
             "            </div>" +
             "            <div class='sidebar-brand-text mx-7'><span class='mLogo'>C</span>ash <span class='mLogo'>M</span>arket</div>" +
             "        </a>" +
@@ -224,14 +223,14 @@ $("#buttonAddAgreement").click(function () {
             "<div class='row'>" +
             "   <div class='col-md-6'>"+
             "       <div id='signatureDiv'>"+
-            "           Firma" + names + ":<br />"+
-            "           <img id='signatureImage' src='#' />"+
+            "           Firma " + names + ":<br />"+
+            "           <img id='signatureImage' height='150px' width='300px' src='#' />"+
             "       </div>"+
             "   </div>"+
             "   <div class='col-md-6'>"+
             "       <div id='signatureDiv'>"+
             "           Firma Fernando Gonzalez:<br />"+
-            "           <img src='img/firmaFernando.png' height='100px' height='50px' /></p>" +
+            "           <img src='img/firmaFernando.png' height='150px' width='300px' /></p>" +
             "       </div>"+
             "   </div>"+
             "</div>"+
@@ -240,7 +239,7 @@ $("#buttonAddAgreement").click(function () {
             "    <div class='modal-footer'>" +
             "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
             "    <!-- boton de capturar firma -->" +
-            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument()'>Imprimir</a>" +
+            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
             '<div class="row">' +
             '<div class="col-md-6">' +
             '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
@@ -376,4 +375,11 @@ let setDeviceList = () => {
                 $("#state").text("No se puede acceder a la cámara, o no le diste permiso.");
             });
     }
+
+
+
+
+
+
+
 })();

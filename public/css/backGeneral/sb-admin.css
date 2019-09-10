@@ -10946,3 +10946,17 @@ body.sidebar-toggled footer.sticky-footer {
 .mLogo{
   color:black;
 }
+
+@media print {
+	#principal{
+	background-color:#666;
+	width:800px;
+	height: auto; /*Junto a overflow: hidden; aplicará a nuestro elemento div el mismo alto que el más alto de sus elementos hijos */ 
+	}
+ 
+	#cuerpo{
+	background-color:#666;
+	width:800px;
+	height: auto; /*Junto a overflow: hidden; aplicará a nuestro elemento div el mismo alto que el más alto de sus elementos hijos */ 
+	}
+}
