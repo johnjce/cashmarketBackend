@@ -32,6 +32,7 @@ Route::post('/customerSearch', 'CustomerController@customerSearch')->name('Custo
 
 Route::get('/newPurchase', 'PurchaseController@newPurchase')->name('Purchase');
 Route::post('/savePurchase', 'PurchaseController@purchaseAdd')->name('SavePurchase');
+Route::post('/purchaseAgreementData', 'PurchaseController@purchaseAgreementData')->name('purchaseAgreementData');
 Route::get('/PurchaseList', 'PurchaseController@purchaseList')->name('PurchaseList');
 
 Route::get('/newDownPayment', 'DownPaymentController@newDownPayment')->name('DownPayment');

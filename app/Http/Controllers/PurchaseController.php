@@ -25,6 +25,16 @@ class PurchaseController extends Controller {
         return view('PurchaseList', compact('purchases'));
     }
 
+    public function purchaseAgreementData(Request $request) {
+        return DB::table('lrvds')
+            ->join('customers', 'customers.IDCL', '=', 'lrvds.IDCL')
+            ->join('products', 'products.currentAgreement', '=', 'lrvds.id')
+            ->where("lrvds.typeDocument","=","compra")
+            ->where("lrvds.documentId","=",$request->documentId)
+            ->select('customers.names', 'customers.lastname','customers.dni','customers.telephone','lrvds.created_at', 'lrvds.documentId',"products.*")
+            ->get();
+    }
+
     public function purchaseAdd(Request $request) {
        //dd($request->IDCL);
         if ($request->ajax()) {
