@@ -42,7 +42,7 @@ class PurchaseController extends Controller {
             foreach ($request->products as $rows) { 
                 $this->addProduct($idAgreement, $rows, 100);
             }
-            return "Guardado";
+            return $idAgreement;
         }
         return "Error: no puede guardar";
     }
@@ -63,6 +63,7 @@ class PurchaseController extends Controller {
         foreach ($rows as $campo => $valor) {
             if ($campo == "state") {
                 $purchase->productState = $valor;
+                $purchase->idPurchase = $idAgreement;
                 $purchase->currentAgreement = $idAgreement;
                 $valor = $state;
             }

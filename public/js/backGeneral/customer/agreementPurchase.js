@@ -375,11 +375,4 @@ let setDeviceList = () => {
                 $("#state").text("No se puede acceder a la cámara, o no le diste permiso.");
             });
     }
-
-
-
-
-
-
-
 })();

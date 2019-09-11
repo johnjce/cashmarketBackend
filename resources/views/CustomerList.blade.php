@@ -25,6 +25,7 @@
                             <th>Telefono</th>
                             <th>Dirección</th>
                             <th>Registrado desde</th>
+                            <th>Foto DNI</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                             <th>Telefono</th>
                             <th>Dirección</th>
                             <th>Registrado desde</th>
+                            <th>Foto DNI</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -48,6 +50,20 @@
                             <td>{{ $customer->telephone }}</td>
                             <td>{{ $customer->address }}</td>
                             <td>{{ date('d-m-Y', strtotime($customer->created_at)) }}</td>
+                            <td>
+                                <a href="#" data-target="#customerDniModal-{{ $customer->IDCL }}" data-toggle="modal" class="color-gray-darker c6 td-hover-none">
+                                    <img src="{{ $customer->img_dni }}" width="200px" height="100px" />
+                                </a>
+                                <div id="customerDniModal-{{ $customer->IDCL }}" aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body mb-0 p-0">
+                                                <img src="{{ $customer->img_dni }}" alt="" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td><a href="/{{ $customer->IDCL }}/customer">Ver cliente</a></td>
                         </tr>
                         @endforeach
