@@ -127,129 +127,21 @@ $("#buttonAddAgreement").click(function () {
         document.querySelector('#customersResult').innerHTML = "";
         postProducts = "{";
         disableSubmit("#buttonAddAgreement");
-        var currentdate = new Date();
-        var datetime = currentdate.getDate() + "/"
-            + (currentdate.getMonth() + 1) + "/"
-            + currentdate.getFullYear() + " SIENDO LAS "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
+        
+        let documento = "<div class='modal-footer'>" +
+        "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
+        "    <!-- boton de capturar firma -->" +
+        "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
+        '<div class="row">' +
+        '<div class="col-md-6">' +
+        '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
+        '</div>';
+            
+        document.querySelector('#modalAgreementsFooter').innerHTML = documento;
 
-        let documento =
-            "<div class='modal-header'>" +
-            "        <h5 class='modal-title' id='exampleModalLabel'>Contrato de Compra</h5>" +
-            "        <button class='close' type='button' data-dismiss='modal' aria-label='Close'>" +
-            "            <span aria-hidden='true'>×</span>" +
-            "        </button>" +
-            "    </div>" +
-            "    <div class='modal-body' id='AgreementContrato'>" +
-            "        <a class='sidebar-brand d-flex paddingModal' href='index.php' id='agreementLogo'>" +
-            "            <div class='sidebar-brand-icon rotate-n-15'>" +
-            "                <img src='/img/logo.png' class='img-responsive my-2 mx-2' width='60px' height='60px'/>" +
-            "            </div>" +
-            "            <div class='sidebar-brand-text mx-7'><span class='mLogo'>C</span>ash <span class='mLogo'>M</span>arket</div>" +
-            "        </a>" +
-            "        <p>En Calle Ayala n&uacute;mero 33 bajo," +
-            "            <br /> Don Benito (Badajoz) " +
-            "            <br />Movil: &Tab;642 760 330 " +
-            "            <br /> Fijo: &Tab;924 983 400 " +
-            "            <br />" +
-            "        </p>" +
-            "        <p>" +
-            "            <strong>REUNIDOS A " + datetime + "</strong>" +
-            "        </p>" +
-            "        <p>" +
-            "            De una parte, Don" +
-            "            <strong>" +
-            "                <span class='textposition'>" + names + "</span>" +
-            "            </strong>" +
-            "            mayor de edad, con domicilio en " +
-            "            <strong>" + address + "</strong>," +
-            "            con documentoo nacional de identidad n&uacute;mero " +
-            "            <strong>" + dni + " 'VENDEDOR',</strong>" +
-            "            y de la otra parte, Don" +
-            "            <strong> Cash Market</strong>, domiciliado en" +
-            "            <strong> Calle Ayala n&uacute;mero 33 bajo </strong> con NIF n&uacute;mero " +
-            "            <strong>34953215T, 'COMPRADOR'.</strong>" +
-            "        </p>" +
-            "        <br/>" +
-            "        <p class='textposition'>EXPONEN </p>" +
-            "        <br/>" +
-            "        <p>" +
-            "            <span class='tex-parrafo2'>I.-</span> " +
-            "            Que (Don <strong><span class='textposition'>" + names + "</span> </strong> /S.A., S.L., etc.) " +
-            "            Con n&uacute;mero de telefono <strong>" + telephone + " </strong>" +
-            "            es propietario de los <span class='tex-parrafo1'>productos:" +
-            "                <br />" +
-            "                <br />" +
-            "                <table width='100%' border='1' cellpadding='5' cellspacing='0' bordercolor='#3D3C2C'>" +
-            "                    <tr>" +
-            "                        <th></th>" +
-            "                        <th>Marca</th>" +
-            "                        <th>Modelo</th>" +
-            "                        <th>S/N</th>" +
-            "                        <th>Estado de<br />producto</th>" +
-            "                        <th>Precio unidad</th>" +
-            "                        <th>Cantidad</th>" +
-            "                        <th>Total</th>" +
-            "                    </tr>";
-        let total = 0;
-        for (var [key, product] of agreementPurchase) {
-            i = key + 1;
-            documento += "    <tr><td>" + i + "</td>";
-            documento += "<td>" + agreementPurchase.get(key).get("make") + "</td>";
-            documento += "<td>" + agreementPurchase.get(key).get("model") + "</td>";
-            documento += "<td>" + agreementPurchase.get(key).get("sn") + "</td>";
-            let state = agreementPurchase.get(key).get("state") == 1 ? "Nuevo" : "Segundamano";
-            documento += "<td>" + state + "</td>";
-            documento += "<td>" + agreementPurchase.get(key).get("pricePurchase") + "</td>";
-            documento += "<td>" + agreementPurchase.get(key).get("stock") + "</td>";
-            let productPrice = agreementPurchase.get(key).get("stock") * agreementPurchase.get(key).get("pricePurchase");
-            documento += "<td>" + productPrice + "</td>";
-            total += productPrice;
-            document += "       </tr>";
-        }
-        documento +=
-            "                </table>" +
-            "                <br />(bienes objeto del contrato), por t&iacute;tulo de compraventa, por el cual se pagara la suma total de <strong>" + total + "&euro;</strong></p>" +
-            "        <p><span class='tex-parrafo2'>II.- </span>Que Don <strong>Cash Market </strong> tiene inter&eacute;s en adquirir los bienes descritos en el ordinal precedente.</p>" +
-            "        <p><span class='tex-parrafo2'>III.- </span>Que por ello ambas partes,</p>" +
-            "        <p><strong>ACUERDAN </strong></p>" +
-            "        <p>Llevar a efecto el presente contrato de COMPRAVENTA MERCANTIL.</p>" +
-            "        <p>Firmando en conformidad.</p>" +
-            "        <p>&nbsp;</p>" +
-            "        <p>&nbsp;</p>" +
-
-            "<div class='row'>" +
-            "   <div class='col-md-6'>"+
-            "       <div id='signatureDiv'>"+
-            "           Firma " + names + ":<br />"+
-            "           <img id='signatureImage' height='150px' width='300px' src='#' />"+
-            "       </div>"+
-            "   </div>"+
-            "   <div class='col-md-6'>"+
-            "       <div id='signatureDiv'>"+
-            "           Firma Fernando Gonzalez:<br />"+
-            "           <img src='img/firmaFernando.png' height='150px' width='300px' /></p>" +
-            "       </div>"+
-            "   </div>"+
-            "</div>"+
-            "    </div>" +
-
-            "    <div class='modal-footer'>" +
-            "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
-            "    <!-- boton de capturar firma -->" +
-            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
-            '<div class="row">' +
-            '<div class="col-md-6">' +
-            '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
-            '</div>' +
-            "</div>";
-        console.log(agreementPurchase);
-        document.querySelector('#modalAgreementsContent').innerHTML = documento;
         document.querySelector('#message').innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>" +
             "    <strong>Ok!</strong> Se creo correctamente el contrato. " +
-            '<a href="#" data-toggle="modal" data-target="#ModalAgreements">' +
+            '<a href="#" data-toggle="modal" data-did=' + data + ' data-target="#ModalAgreements">' +
             '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>' +
             'ver/firmar' +
             '</a>' +

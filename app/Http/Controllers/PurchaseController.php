@@ -31,7 +31,7 @@ class PurchaseController extends Controller {
             ->join('products', 'products.currentAgreement', '=', 'lrvds.id')
             ->where("lrvds.typeDocument","=","compra")
             ->where("lrvds.documentId","=",$request->documentId)
-            ->select('customers.names', 'customers.lastname','customers.dni','customers.telephone','lrvds.created_at', 'lrvds.documentId',"products.*")
+            ->select('customers.names', 'customers.lastname','customers.dni','customers.telephone','lrvds.created_at', 'lrvds.documentId', 'lrvds.signatureCustomer',"products.*")
             ->get();
     }
 
@@ -40,9 +40,9 @@ class PurchaseController extends Controller {
         if ($request->ajax()) {
             $idAgreement = $this->addAgreement($request->IDCL, $request->total, "compra");
             foreach ($request->products as $rows) { 
-                $this->addProduct($idAgreement, $rows, 100);
+                $this->addProduct($idAgreement[1], $rows, 100);
             }
-            return $idAgreement;
+            return $idAgreement[0];
         }
         return "Error: no puede guardar";
     }
@@ -55,7 +55,7 @@ class PurchaseController extends Controller {
         $agreement->typeDocument = $typeDocument;
         $agreement->documentId = bin2hex(random_bytes(10));
         $agreement->save();
-        return $agreement->id;
+        return [$agreement->documentId,$agreement->id];
     }
 
     public function addProduct($idAgreement, $rows, $state) {

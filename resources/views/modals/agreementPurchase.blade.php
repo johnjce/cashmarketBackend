@@ -8,9 +8,9 @@
                 </button>
             </div>
             <div class='modal-body' id='AgreementContrato'>
-                <a class='sidebar-brand d-flex paddingModal' href='index.php' id='agreementLogo'>
+                <a class='sidebar-brand d-flex paddingModal' href='/' id='agreementLogo'>
                     <div class='sidebar-brand-icon rotate-n-15'>
-                        <img src='/img/logo.png' class='img-responsive my-2 mx-2' width='60px' height='60px' />
+                        <img src='http://cashmarkets.es/img/logo.png' class='img-responsive my-2 mx-2' width='60px' height='60px' />
                     </div>
                     <div class='sidebar-brand-text mx-7'><span class='mLogo'>C</span>ash <span class='mLogo'>M</span>arket</div>
                 </a>
@@ -57,7 +57,7 @@
                 <div class='row'>
                     <div class='col-md-6'>
                         <div id='signatureDiv'>
-                            <img id='signatureImage' height='150px' width='300px' src='#' /><br />
+                            <img id='signatureImage' height='150px' width='300px' src='http://cashmarkets.es/img/firma-digital.png' /><br />
                             Firma:. <label class="names"></label><br />
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-            <div class='modal-footer'>
+            <div class='modal-footer' id='modalAgreementsFooter'>
                 <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>
                 <!-- boton de capturar firma -->
                 <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>
