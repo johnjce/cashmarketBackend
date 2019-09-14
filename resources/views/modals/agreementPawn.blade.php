@@ -31,7 +31,7 @@
                     mayor de edad, con domicilio en
                     <strong><label class="address"></label></strong>,
                     con documento nacional de identidad n&uacute;mero
-                    <strong> <label class="dni"></label> " 'VENDEDOR',</strong>
+                    <strong> <label class="dni"></label> 'VENDEDOR',</strong>
                     y de la otra parte, Don
                     <strong> Cash Market</strong>, domiciliado en
                     <strong> Calle Ayala n&uacute;mero 33 bajo </strong> con NIF n&uacute;mero
@@ -41,33 +41,35 @@
                 <p class='textposition'>EXPONEN </p>
                 <br />
                 <p>
-                    <span class='tex-parrafo2'>I.-</span>
-                    Que (Don <strong><span class='textposition'> <label class="names"></label> </span> </strong> /S.A., S.L., etc.)
-                    Con n&uacute;mero de telefono <strong><label class="mobile"></label></strong>
-                    es propietario de los <span class='tex-parrafo1'>productos:
-                        <br />
-                        <br />
-                        <label class="productsTable"></label>
-                        <br />(bienes objeto del contrato), por t&iacute;tulo de compraventa, por el cual se pagara la suma total de <strong> <label class="total"></label> &euro;</strong></p>
-                <p><span class='tex-parrafo2'>II.- </span>Que Don <strong>Cash Market </strong> tiene inter&eacute;s en adquirir los bienes descritos en el ordinal precedente.</p>
-                <p><span class='tex-parrafo2'>III.- </span>Que por ello ambas partes,</p>
-                <p><strong>ACUERDAN </strong></p>
-                <p>Llevar a efecto el presente contrato de COMPRAVENTA MERCANTIL.</p>
-                <p>Firmando en conformidad.</p>
-                <div class='row'>
-                    <div class='col-md-6'>
-                        <div id='signatureDiv'>
-                            <img id='signatureImage' height='150px' width='300px' src='http://cashmarkets.es/img/firma-digital.png' /><br />
-                            Firma:. <label class="names"></label><br />
+                    <span class="tex-parrafo2">I.-</span>
+                    Con fecha <?php echo date('d-m-Y'); ?> he recibido de Don <strong>
+                        <span class="textposition"> <label class="names"></label></span>
+                    </strong> con DNI <strong>DNICLIENTE</strong>, y con domicilio en <strong>DOMICILIOCLIETE</strong> en concepto de empe&ntilde;o del (de los) art&iacute;culo(s):
+
+                    <label class="productsTable"></label>
+
+                    Por lo cual debe abonar la suma <strong>TOTALDEVOLVER</strong> euros, de los cuales <strong>PRECIOARTICULO</strong> euros por valor del(los) art&iacute;culo(s) y 
+                    <strong></strong> euros como el 30% del valor prestado en abono de intereses, como m&aacute;ximo el d&iacute;a <strong>
+                        <?php echo date('d-m-Y'); ?></strong>.
+                        
+                    <span class="tex-parrafo2">II.-</span> En caso de que el cliente desee conservar el(los) art&iacute;culo(s) una vez pasada esta fecha debe renovar haciendo efectivo el pago de los intereses estipulados "<strong></strong> euros", o bien el abono total retirando dicho art&iacute;culo. <br/>
+                    <span class="tex-parrafo2">III.-</span> En caso de no ser retirado ni abonado se proceder&aacute; a la venta, reciclaje, o bien lo que la empresa determine oportuno. <br/>
+                    <span class="tex-parrafo2">IV.-</span> El cliente admite haber le&iacute;do y aceptado las condiciones estipuladas anteriormente.
+                    <p>Firmando en conformidad.</p>
+                    <div class='row'>
+                        <div class='col-md-6'>
+                            <div id='signatureDiv'>
+                                <img id='signatureImage' height='150px' width='300px' src='http://cashmarkets.es/img/firma-digital.png' /><br />
+                                Firma:. <label class="names"></label><br />
+                            </div>
+                        </div>
+                        <div class='col-md-6'>
+                            <div id='signatureDiv'>
+                                <img src='img/firmaFernando.png' height='150px' width='300px' /><br />
+                                Firma:. Fernando Gonzalez<br />
+                            </div>
                         </div>
                     </div>
-                    <div class='col-md-6'>
-                        <div id='signatureDiv'>
-                            <img src='img/firmaFernando.png' height='150px' width='300px' /><br />
-                            Firma:. Fernando Gonzalez<br />
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class='modal-footer' id='modalAgreementsFooter'>

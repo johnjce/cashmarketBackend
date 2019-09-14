@@ -10922,7 +10922,7 @@ body.sidebar-toggled footer.sticky-footer {
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  background-color: #b8daff;
+  background-color: transparent;
   color: #000;
   font-family: cursive;
   font-size: 14px;
@@ -10945,4 +10945,18 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .mLogo{
   color:black;
+}
+
+@media print {
+	#principal{
+	background-color:#666;
+	width:800px;
+	height: auto; /*Junto a overflow: hidden; aplicará a nuestro elemento div el mismo alto que el más alto de sus elementos hijos */ 
+	}
+ 
+	#cuerpo{
+	background-color:#666;
+	width:800px;
+	height: auto; /*Junto a overflow: hidden; aplicará a nuestro elemento div el mismo alto que el más alto de sus elementos hijos */ 
+	}
 }

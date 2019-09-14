@@ -95,14 +95,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="/newPurchase" id="agreementsDropdown">
                     <i class="far fa-handshake"></i>
-                    <span>Contratos</span>
+                    <span>Compra</span>
                 </a>
-                <!--<div class="dropdown-menu" aria-labelledby="agreementsDropdown">
-                <h6 class="dropdown-header">Formularios:</h6>
-                <a class="dropdown-item" href="newPurchase">Compra</a>
-                <a class="dropdown-item" href="newDownPayment">Depósito</a>
-                <a class="dropdown-item" href="newPawn">Empeño</a>
-            </div>-->
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/newPawn" id="agreementsDropdown">
+                    <i class="far fa-handshake"></i>
+                    <span>Empeño</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/newDownPayment" id="agreementsDropdown">
+                    <i class="far fa-handshake"></i>
+                    <span>Deposito</span>
+                </a>
             </li>
 
             <li class="nav-item dropdown">
@@ -151,7 +159,7 @@
 
 
     <!-- Custom scripts for all pages-->
-    <script src="js/backGeneral/sb-admin.min.js"></script>
+    <script src="js/backGeneral/sb-admin.js"></script>
     <script>
         $(function() {
             // bind change event to select
@@ -163,6 +171,74 @@
                 return false;
             });
         });
+    </script>
+
+    <script>
+        //rellena la info del contrato, recibe  documentid 
+        $('#ModalAgreements').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // De donde saco la info 
+            var documentId = button.data('did') // Extract info from data-* attributes
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/purchaseAgreementData',
+                type: 'post',
+                data: {
+                    "documentId": documentId
+                },
+                success: function(data) {
+                    var modal = $(this)
+                    $('.names').text(data[0]['names'] + " " + data[0]['lastname'])
+                    $('.dni').text(data[0]['dni'])
+                    $('.mobile').text(data[0]['telephone'])
+                    $('.amount').text(data[0]['pricePurchase'])
+                    $('.created').text(data[0]['created_at'])
+                    $('.modal-title').text('Contrato de compra - ' + data[0]['documentId'])
+                    $("#signatureImage_"+data[0]['documentId']).attr("src",data[0]['signatureCustomer']);
+
+                    let documento = "<table width='100%' border='1' cellpadding='5' cellspacing='0' bordercolor='#3D3C2C'>" +
+                        "    <tr>" +
+                        "        <th></th>" +
+                        "        <th>Marca</th>" +
+                        "        <th>Modelo</th>" +
+                        "        <th>S/N</th>" +
+                        "        <th>Estado de<br />producto</th>" +
+                        "        <th>Precio unidad</th>" +
+                        "        <th>Cantidad</th>" +
+                        "        <th>Total</th>" +
+                        "    </tr>";
+                    let key = 0;
+                    let total = 0;
+                    data.forEach(product => {
+                        key++;
+                        documento += " <tr><td>" + key + "</td>" +
+                            "<td>" + product.make + "</td>" +
+                            "<td>" + product.model + "</td>" +
+                            "<td>" + product.sn + "</td>";
+
+                        let state = product.state == 1 ? "Nuevo" : "Segundamano";
+
+                        documento += "<td>" + state + "</td>" +
+                            "        <td>" + product.pricePurchase + "&euro;</td>" +
+                            "        <td>" + product.stock + "</td>";
+
+                        let productPrice = product.stock * product.pricePurchase;
+                        documento += "    <td>" + productPrice + "&euro;</td>";
+                        total += productPrice;
+                        documento += "</tr>";
+                    });
+                    documento += "</table>";
+                    $('.productsTable').html(documento);
+                    $('.total').text(total);
+                },
+                error: function(jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        })
     </script>
 </body>
 

@@ -6,6 +6,7 @@ use App\Lrvd;
 use App\Product;
 use App\Producttype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller {
     public function newPurchase() {
@@ -14,7 +15,24 @@ class PurchaseController extends Controller {
     }
 
     public function purchaseList() {
-        return view('PurchaseList');
+        //dd("para en dd");
+        $purchases = DB::table('lrvds')
+            ->join('customers', 'customers.IDCL', '=', 'lrvds.IDCL')
+            //->join('products', 'products.currentAgreement', '=', 'lrvds.id')
+            ->where("lrvds.typeDocument","=","compra")
+            ->select('customers.names', 'customers.lastname','customers.dni','lrvds.created_at', 'lrvds.documentId')
+            ->paginate(15);
+        return view('PurchaseList', compact('purchases'));
+    }
+
+    public function purchaseAgreementData(Request $request) {
+        return DB::table('lrvds')
+            ->join('customers', 'customers.IDCL', '=', 'lrvds.IDCL')
+            ->join('products', 'products.currentAgreement', '=', 'lrvds.id')
+            ->where("lrvds.typeDocument","=","compra")
+            ->where("lrvds.documentId","=",$request->documentId)
+            ->select('customers.names', 'customers.lastname','customers.dni','customers.telephone','lrvds.created_at', 'lrvds.documentId', 'lrvds.signatureCustomer',"products.*")
+            ->get();
     }
 
     public function purchaseAdd(Request $request) {
@@ -22,9 +40,9 @@ class PurchaseController extends Controller {
         if ($request->ajax()) {
             $idAgreement = $this->addAgreement($request->IDCL, $request->total, "compra");
             foreach ($request->products as $rows) { 
-                $this->addProduct($idAgreement, $rows, 100);
+                $this->addProduct($idAgreement[1], $rows, 100);
             }
-            return "Guardado";
+            return $idAgreement[0];
         }
         return "Error: no puede guardar";
     }
@@ -37,7 +55,7 @@ class PurchaseController extends Controller {
         $agreement->typeDocument = $typeDocument;
         $agreement->documentId = bin2hex(random_bytes(10));
         $agreement->save();
-        return $agreement->id;
+        return [$agreement->documentId,$agreement->id];
     }
 
     public function addProduct($idAgreement, $rows, $state) {
@@ -45,6 +63,7 @@ class PurchaseController extends Controller {
         foreach ($rows as $campo => $valor) {
             if ($campo == "state") {
                 $purchase->productState = $valor;
+                $purchase->idPurchase = $idAgreement;
                 $purchase->currentAgreement = $idAgreement;
                 $valor = $state;
             }
