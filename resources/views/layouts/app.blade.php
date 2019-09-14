@@ -95,14 +95,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="/newPurchase" id="agreementsDropdown">
                     <i class="far fa-handshake"></i>
-                    <span>Contratos</span>
+                    <span>Compra</span>
                 </a>
-                <!--<div class="dropdown-menu" aria-labelledby="agreementsDropdown">
-                <h6 class="dropdown-header">Formularios:</h6>
-                <a class="dropdown-item" href="newPurchase">Compra</a>
-                <a class="dropdown-item" href="newDownPayment">Depósito</a>
-                <a class="dropdown-item" href="newPawn">Empeño</a>
-            </div>-->
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/newPawn" id="agreementsDropdown">
+                    <i class="far fa-handshake"></i>
+                    <span>Empeño</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/newDownPayment" id="agreementsDropdown">
+                    <i class="far fa-handshake"></i>
+                    <span>Deposito</span>
+                </a>
             </li>
 
             <li class="nav-item dropdown">

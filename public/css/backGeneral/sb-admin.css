@@ -10922,7 +10922,7 @@ body.sidebar-toggled footer.sticky-footer {
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  background-color: #b8daff;
+  background-color: transparent;
   color: #000;
   font-family: cursive;
   font-size: 14px;

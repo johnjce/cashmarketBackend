@@ -4,8 +4,23 @@ $.ajaxSetup({
     }
 });
 
+//A la escucha de cambios en los campos de precio y porcentaje
+$("#pricePawn").on("change", function() {
+    pawAvise();
+});
+$("#pawnPercent").on("change", function() {
+    pawAvise();
+});
+
+//funcion que cambia el div con el precio a devolver 
+function pawAvise(){
+    let dv = $("#pricePawn").val() * ($("#pawnPercent").val()/100 );
+    dv += parseFloat($("#pricePawn").val(),2);
+    $('#pawnAmount').html("<h4>Devuelve por este producto:"+ dv +" €</h4>");
+}
+
 var agreementId = Math.floor(Math.random() * (4000 - 100 + 1)) + 100;
-var agreementPurchase = new Map();
+var agreementPawn = new Map();
 var productsPda = document.getElementById("productsPda");
 var i = 0;
 
@@ -27,10 +42,10 @@ function checkInputNumber(idInput) {
 }
 
 function delRow(id) {
-    agreementPurchase.delete(id);
+    agreementPawn.delete(id);
     alert("#p_"+id);
     $("#p_"+id).remove();
-    agreementPurchase.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
+    agreementPawn.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
 }
 
 $("#buttonAddProduct").click(function () {
@@ -46,24 +61,23 @@ $("#buttonAddProduct").click(function () {
 
     video.play();
 
-
-
     enableSubmit("#buttonAddAgreement");
     var product = new Map();
     product.set("make", $("#make").val());
     product.set("model", $("#model").val());
     product.set("sn", $("#sn").val());
     product.set("type", $("select[name=type]").val());
-    product.set("pricePurchase", $("#pricePurchase").val());
-    product.set("priceSale", $("#priceSale").val());
-    product.set("stock", $("#stock").val());
+    product.set("pricePawn", $("#pricePawn").val());
+    product.set("pawnPercent", $("#pawnPercent").val());
+    product.set("terms", $("#terms").val());
+    product.set("lastDayOfPay", $("#lastDayOfPay").val());
     product.set("state", $("select[name=state]").val());
     product.set("productImage", encodeURIComponent(productImage));
-    agreementPurchase.set(i, product);
+    agreementPawn.set(i, product);
 
     let productHtml = "<div id='p_"+ i +"'><p><span><b>Marca: </b></span>" + $("#make").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Modelo:</b></span>"+  $("#model").val() + "</p>" +
-                      "<p><span><b>S.N.: </b></span>"+  $("#sn").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Cantidad:</b> </span>"+  $("#stock").val() + "</p>" +
-                      "<p><span><b>Total: </b></span>"+  $("#stock").val() * $("#pricePurchase").val() + "&euro;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                      "<p><span><b>S.N.: </b></span>"+  $("#sn").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Fecha limite:</b> </span>"+  $("#lastDayOfPay").val() + "</p>" +
+                      "<p><span><b>Total: </b></span>"+  $("#pricePawn").val() + "&euro;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
                       "<button type=\"button\" class=\"btn btn-success\" onclick=\"delRow("+ i +")\"><i class=\"far fa-trash-alt\"></i></button></p><hr></div>";
     $("#productsPda").append(productHtml);
     i++;
@@ -72,8 +86,9 @@ $("#buttonAddProduct").click(function () {
     $("#model").val("");
     $("#sn").val("");
     $("#stock").val(1);
-    $("#pricePurchase").val("");
-    $("#priceSale").val("");
+    $("#pricePawn").val("");
+    $("#terms").val("");
+    $("#pawnPercent").val("30");
 
     disableSubmit("#buttonAddProduct");
 
@@ -109,10 +124,10 @@ $("#buttonAddAgreement").click(function () {
         telephone = jdata[0].telephone;
     });
 
-    agreementPurchase.forEach(toString);
+    agreementPawn.forEach(toString);
     postProducts = postProducts.substring(0, postProducts.length - 1);
     postProducts += "}";
-    var posting = $.post("./savePurchase", {
+    var posting = $.post("./savePawn", {
         "products": jQuery.parseJSON(postProducts),
         "IDCL": $("#IDCL").val(),
         "total": 145
@@ -144,7 +159,7 @@ $("#buttonAddAgreement").click(function () {
             "        <span aria-hidden='true'>&times;</span>" +
             "    </button>" +
             "</div>";
-        agreementPurchase = new Map();
+        agreementPawn = new Map();
     });
     posting.fail(function (data) {
         document.querySelector('#message').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!</strong> Existe un problema, porfavor revise el formulario e intentelo de nuevo.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -156,8 +171,8 @@ $("#addProductForm *").on("change keydown keyup", function () {
     if (checkInput("#make") &&
         checkInput("#model") &&
         checkInput("#sn") &&
-        checkInputNumber("#pricePurchase") &&
-        checkInputNumber("#priceSale")) {
+        checkInputNumber("#pricePawn") &&
+        checkInputNumber("#pawnPercent")) {
         enableSubmit("#buttonAddProduct");
     } else {
         disableSubmit("#buttonAddProduct");

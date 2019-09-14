@@ -40,6 +40,6 @@ Route::get('/newDownPayment', 'DownPaymentController@newDownPayment')->name('Dow
 Route::get('/DownPaymentList', 'DownPaymentController@downPaymentList')->name('DownPaymentList');
 
 Route::get('/newPawn', 'PawnController@newPawn')->name('Pawn');
-//Route::post('/savePawn', 'PawnController@pawnAdd')->name('SavePawn');
+Route::post('/savePawn', 'PawnController@pawnAdd')->name('SavePawn');
 Route::get('/PawnList', 'PawnController@pawnList')->name('PawnList');
 

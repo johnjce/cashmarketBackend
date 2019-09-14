@@ -114,21 +114,6 @@
                             <br />
                             <select name="deviceList" id="deviceList"></select>
                         </div>
-
-                        <!--
-                        <div class="col-md-6">
-                            <div id="signatureDiv">
-                                Signature image:<br />
-                                <img id="signatureImage" src="#" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button id="signButton" value="Start demo" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()" disabled>Firmar <i class="fas fa-signature"></i></button>
-                        </div>
--->
                     </div>
                 </form>
             </div>
