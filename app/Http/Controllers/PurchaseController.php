@@ -29,9 +29,18 @@ class PurchaseController extends Controller {
         return DB::table('lrvds')
             ->join('customers', 'customers.IDCL', '=', 'lrvds.IDCL')
             ->join('products', 'products.currentAgreement', '=', 'lrvds.id')
-            ->where("lrvds.typeDocument","=","compra")
             ->where("lrvds.documentId","=",$request->documentId)
-            ->select('customers.names', 'customers.lastname','customers.dni','customers.telephone','lrvds.created_at', 'lrvds.documentId', 'lrvds.signatureCustomer',"products.*")
+            ->select('customers.names',
+                     'customers.lastname',
+                     'customers.dni',
+                     'customers.telephone',
+                     'customers.address',
+                     'lrvds.typeDocument', 
+                     'lrvds.created_at', 
+                     'lrvds.documentId', 
+                     'lrvds.signatureCustomer',
+                     'products.*')
+            ->orderBy('lrvds.created_at', 'desc')
             ->get();
     }
 

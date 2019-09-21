@@ -11,7 +11,6 @@
 
     <title>CashMarkets V2.0</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('scriptsFirma')
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/backGeneral/sb-admin.css" rel="stylesheet">
+
 
 </head>
 
@@ -155,11 +155,13 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <script src="vendor/chart.js/Chart.min.js"></script>
-    @yield('scripts')
+
 
 
     <!-- Custom scripts for all pages-->
     <script src="js/backGeneral/sb-admin.js"></script>
+
+    @yield('scripts')
     <script>
         $(function() {
             // bind change event to select
@@ -172,7 +174,7 @@
             });
         });
     </script>
-
+    @yield('scriptsFirma')
     <script>
         //rellena la info del contrato, recibe  documentid 
         $('#ModalAgreements').on('show.bs.modal', function(event) {
@@ -191,15 +193,27 @@
                 },
                 success: function(data) {
                     var modal = $(this)
-                    $('.names').text(data[0]['names'] + " " + data[0]['lastname'])
-                    $('.dni').text(data[0]['dni'])
+                    console.log(data);
+                    let capitalName = data[0]['names'] + " " + data[0]['lastname'].toLowerCase().replace(/\b[a-z]/g, function(txtVal) {
+                        return txtVal.toUpperCase();
+                    });
+                    let capitalAddress = data[0]['address'].toLowerCase().replace(/\b[a-z]/g, function(txtVal) {
+                        return txtVal.toUpperCase();
+                    });
+                    let agreementType = data[0]['typeDocument']=='pawn'?'empeño':data[0]['typeDocument'];
+                    $('.names').text(capitalName)
+                    $('.address').text(capitalAddress)
+                    $('.dni').text(data[0]['dni'].toUpperCase())
                     $('.mobile').text(data[0]['telephone'])
                     $('.amount').text(data[0]['pricePurchase'])
+                    $('.endTimeToPay').text(data[0]['lastDayOfPay'])
                     $('.created').text(data[0]['created_at'])
-                    $('.modal-title').text('Contrato de compra - ' + data[0]['documentId'])
-                    $("#signatureImage_"+data[0]['documentId']).attr("src",data[0]['signatureCustomer']);
+                    $('.modal-title').text('Contrato de '+ agreementType +'- ' + data[0]['documentId'])
+                    $("#signatureImage_" + data[0]['documentId']).attr("src", data[0]['signatureCustomer']);
+                    $('.terms').text("");
 
-                    let documento = "<table width='100%' border='1' cellpadding='5' cellspacing='0' bordercolor='#3D3C2C'>" +
+                    let documento = "<br/>" +
+                        "<table width='100%' border='1' cellpadding='5' cellspacing='0' bordercolor='#3D3C2C'>" +
                         "    <tr>" +
                         "        <th></th>" +
                         "        <th>Marca</th>" +
@@ -207,32 +221,41 @@
                         "        <th>S/N</th>" +
                         "        <th>Estado de<br />producto</th>" +
                         "        <th>Precio unidad</th>" +
-                        "        <th>Cantidad</th>" +
+                        "        <th>";
+                    documento += data[0]['stock'] == null ? "Porcentaje" : "Cantidad";
+                    documento += "</th>" +
                         "        <th>Total</th>" +
                         "    </tr>";
                     let key = 0;
-                    let total = 0;
+                    let total = intereses = prestado = 0;
                     data.forEach(product => {
                         key++;
                         documento += " <tr><td>" + key + "</td>" +
                             "<td>" + product.make + "</td>" +
                             "<td>" + product.model + "</td>" +
                             "<td>" + product.sn + "</td>";
-
-                        let state = product.state == 1 ? "Nuevo" : "Segundamano";
-
-                        documento += "<td>" + state + "</td>" +
-                            "        <td>" + product.pricePurchase + "&euro;</td>" +
-                            "        <td>" + product.stock + "</td>";
-
-                        let productPrice = product.stock * product.pricePurchase;
-                        documento += "    <td>" + productPrice + "&euro;</td>";
-                        total += productPrice;
-                        documento += "</tr>";
+                            
+                            let productPrice = product.pricePurchase == null ? product.pricePawn : product.pricePurchase;
+                            let productStock = product.stock == null ? product.pawnPercent : product.stock;
+                            intereses += parseFloat(productStock * productPrice / 100, 2);
+                            prestado += productPrice;
+                            let state = product.productState == 1 ? "Nuevo" : "Segundamano";
+                            let sSymbol = product.stock == null ? "%" : "";
+                            documento += "<td>" + state + "</td>" +
+                            "        <td>" + productPrice + "&euro;</td>" +
+                            "        <td>" + productStock + sSymbol + "</td>";
+                            
+                            productPrice = product.pricePawn == null ? parseFloat(productStock * productPrice, 2) : parseFloat(productStock * productPrice / 100, 2) + parseFloat(product.pricePawn == null ? 0 : product.pricePawn, 2);
+                            documento += "    <td>" + productPrice + "&euro;</td>";
+                            total += productPrice;
+                            documento += "</tr>";
+                            $('.terms').append(product.terms+", ");
                     });
-                    documento += "</table>";
+                    documento += "</table>" + "<br/>";
                     $('.productsTable').html(documento);
-                    $('.total').text(total);
+                    $('.total').text(parseFloat(total, 2));
+                    $('.priceObjects').text(parseFloat(prestado, 2));
+                    $('.priceInterest').text(parseFloat(intereses, 2));
                 },
                 error: function(jqXhr, textStatus, errorThrown) {
                     console.log(errorThrown);

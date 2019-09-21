@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends Controller
@@ -31,7 +29,8 @@ class CustomerController extends Controller
         
     public function seeCustomers(){
         $customers = Customer::all();
-        return view('CustomerList',compact('customers'));
+        dd($customers);
+        //return view('CustomerList',compact('customers'));
     }
 
     public function save(Request $request){

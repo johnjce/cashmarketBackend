@@ -28,12 +28,11 @@ function checkInputNumber(idInput) {
 
 function delRow(id) {
     agreementPurchase.delete(id);
-    alert("#p_"+id);
     $("#p_"+id).remove();
     agreementPurchase.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
 }
 
-$("#buttonAddProduct").click(function () {
+$("#buttonAddProduct").on('click', function () {
     event.preventDefault();
 
     video.pause();
@@ -76,7 +75,7 @@ $("#buttonAddProduct").click(function () {
     $("#priceSale").val("");
 
     disableSubmit("#buttonAddProduct");
-
+return true;
 
 });
 
@@ -102,7 +101,6 @@ $("#buttonAddAgreement").click(function () {
     var client = $.post("./customerSearch", { "q": $("#IDCL").val() });
     client.done(function (data) {
         var jdata = JSON.parse(data);
-        var x = "";
         names = jdata[0].names + " " + jdata[0].lastname;
         address = jdata[0].address;
         dni = jdata[0].dni;

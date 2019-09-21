@@ -34,7 +34,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fab fa-apple"></i></span>
               </div>
-              <input type="text" name="make" id="make" value="" class="form-control" placeholder="Marca" required="">
+              <input type="text" name="make" id="make" value="" class="form-control" placeholder="Marca" >
               <div class="invalid-feedback" style="width: 100%;">
                 Marca requerida.
               </div>
@@ -49,7 +49,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-mobile"></i></span>
               </div>
-              <input type="text" name="model" id="model" value="" class="form-control" placeholder="Modelo" required="">
+              <input type="text" name="model" id="model" value="" class="form-control" placeholder="Modelo" >
               <div class="invalid-feedback" style="width: 100%;">
                 Modelo requerido.
               </div>
@@ -61,7 +61,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-barcode"></i></span>
               </div>
-              <input type="text" name="sn" id="sn" value="" class="form-control" placeholder="Número de serie" required="">
+              <input type="text" name="sn" id="sn" value="" class="form-control" placeholder="Número de serie" >
               <div class="invalid-feedback" style="width: 100%;">
                 Número de serie requerido.
               </div>
@@ -76,7 +76,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
               </div>
-              <input type="number" name="pricePurchase" id="pricePurchase" value="" class="form-control" placeholder="Precio de compra" required="">
+              <input type="number" name="pricePurchase" id="pricePurchase" value="" class="form-control" placeholder="Precio de compra" >
               <div class="invalid-feedback" style="width: 100%;">
                 Precio de compra requerido.
               </div>
@@ -88,7 +88,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
               </div>
-              <input type="number" name="priceSale" id="priceSale" value="" class="form-control" placeholder="Precio de venta" required="">
+              <input type="number" name="priceSale" id="priceSale" value="" class="form-control" placeholder="Precio de venta" >
               <div class="invalid-feedback" style="width: 100%;">
                 Precio de venta requerido.
               </div>
@@ -100,7 +100,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
               </div>
-              <input type="number" name="stock" id="stock" value="1" class="form-control" placeholder="Número de serie" required="">
+              <input type="number" name="stock" id="stock" value="1" class="form-control" placeholder="Número de serie" >
             </div>
           </div>
         </div>

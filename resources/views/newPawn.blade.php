@@ -10,6 +10,7 @@
     </div>
     @endif
 
+    <p id="message">Los campos marcados con (*) significan que son obligatorios.</p>
     <div class="row py-2 text-left">
         <div class="input-group col-12">
             <input type="text" id="inputSearch" class="search-query form-control" placeholder="Buscar Cliente">
@@ -20,7 +21,6 @@
             </span>
         </div>
         <div id="customersResult"></div>
-        <p id="message">Los campos marcados con (*) significan que son obligatorios.</p>
     </div>
     <div class="row">
         <div class="col-lg-6 col-sm-12 col-md-12 mb-0">
@@ -33,7 +33,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fab fa-apple"></i></span>
                             </div>
-                            <input type="text" name="make" id="make" value="" class="form-control" placeholder="Marca" required="">
+                            <input type="text" name="make" id="make" value="" class="form-control" placeholder="Marca">
                             <div class="invalid-feedback" style="width: 100%;">
                                 Marca requerida.
                             </div>
@@ -48,7 +48,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-mobile"></i></span>
                             </div>
-                            <input type="text" name="model" id="model" value="" class="form-control" placeholder="Modelo" required="">
+                            <input type="text" name="model" id="model" value="" class="form-control" placeholder="Modelo">
                             <div class="invalid-feedback" style="width: 100%;">
                                 Modelo requerido.
                             </div>
@@ -60,7 +60,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-barcode"></i></span>
                             </div>
-                            <input type="text" name="sn" id="sn" value="" class="form-control" placeholder="Número de serie" required="">
+                            <input type="text" name="sn" id="sn" value="" class="form-control" placeholder="Número de serie">
                             <div class="invalid-feedback" style="width: 100%;">
                                 Número de serie requerido.
                             </div>
@@ -75,7 +75,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
                             </div>
-                            <input type="number" name="pricePawn" id="pricePawn" value="" class="form-control" placeholder="Monto prestado" required="">
+                            <input type="number" name="pricePawn" id="pricePawn" value="" class="form-control" placeholder="Monto prestado">
                             <div class="invalid-feedback" style="width: 100%;">
                                 Monto prestado requerido.
                             </div>
@@ -87,15 +87,15 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">%</span>
                             </div>
-                            <input type="number" name="pawnPercent" id="pawnPercent" value="30" min="1" max="100" class="form-control" placeholder="Precio de venta" required="">
+                            <input type="number" name="pawnPercent" id="pawnPercent" value="30" min="1" max="100" class="form-control" placeholder="Precio de venta">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-1">
                         <label for="lastDayOfPay">Fecha limite</label>
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" class="form-control" name="lastDayOfPay" id="lastDayOfPay">
+                        <div class="input-group date">
+                            <input type="text" class="form-control datepicker" name="lastDayOfPay" id="lastDayOfPay">
                             <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
+                                <i class = "glyphicon glyphicon-th" > </i> 
                             </div>
                         </div>
                     </div>
@@ -180,13 +180,27 @@
 @include('modals.agreementPawn')
 @endsection
 @section('scripts')
+<!-- Datepicker Files -->
+
+<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+<!-- Languaje -->
+<script src="{{asset('js/bootstrap-datepicker.es.min.js')}}"></script>
+
 <script src="{{ asset('js/backGeneral/customer/customerSearch.js') }}" defer></script>
 <script src="{{ asset('js/backGeneral/agreementPawn.js') }}" defer></script>
-
+<script>
+    $('.datepicker').datepicker({
+        format: "dd/mm/yyyy",
+        todayBtn: "linked",
+        language: "es",
+        autoclose: true
+    });
+</script>
 @endsection
 
 @section('scriptsFirma')
-
+<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
+<link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.standalone.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('js/backGeneral/customer/signature/demoButtons.css') }}" defer />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/BigInt.js') }}" defer></script>

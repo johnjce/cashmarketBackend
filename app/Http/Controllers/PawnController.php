@@ -41,9 +41,9 @@ class PawnController extends Controller{
         if ($request->ajax()) {
             $idAgreement = $this->addAgreement($request->IDCL, $request->total, "pawn");
             foreach ($request->products as $rows) {
-                $this->addProduct($idAgreement, $rows, 100);
+                $this->addProduct($idAgreement[1], $rows, 200);
             }
-            return $idAgreement;
+            return $idAgreement[0];
         }
         return "Error: no puede guardar";
     }
@@ -56,7 +56,7 @@ class PawnController extends Controller{
         $agreement->typeDocument = $typeDocument;
         $agreement->documentId = bin2hex(random_bytes(10));
         $agreement->save();
-        return $agreement->id;
+        return [$agreement->documentId,$agreement->id];
     }
 
     public function addProduct($idAgreement, $rows, $state)

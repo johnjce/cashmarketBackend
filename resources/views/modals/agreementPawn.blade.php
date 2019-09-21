@@ -14,62 +14,117 @@
                     </div>
                     <div class='sidebar-brand-text mx-7'><span class='mLogo'>C</span>ash <span class='mLogo'>M</span>arket</div>
                 </a>
-                <p>En Calle Ayala n&uacute;mero 33 bajo,
-                    <br /> Don Benito (Badajoz)
-                    <br />Movil: &Tab;642 760 330
-                    <br /> Fijo: &Tab;924 983 400
-                    <br />
-                </p>
-                <p>
-                    <strong>REUNIDOS A <label class="created"></label> </strong>
-                </p>
-                <p>
-                    De una parte, Don
-                    <strong>
-                        <span class='textposition'> <label class="names"></label> </span>
-                    </strong>
-                    mayor de edad, con domicilio en
-                    <strong><label class="address"></label></strong>,
-                    con documento nacional de identidad n&uacute;mero
-                    <strong> <label class="dni"></label> 'VENDEDOR',</strong>
-                    y de la otra parte, Don
-                    <strong> Cash Market</strong>, domiciliado en
-                    <strong> Calle Ayala n&uacute;mero 33 bajo </strong> con NIF n&uacute;mero
-                    <strong>34953215T, 'COMPRADOR'.</strong>
-                </p>
-                <br />
-                <p class='textposition'>EXPONEN </p>
-                <br />
-                <p>
-                    <span class="tex-parrafo2">I.-</span>
-                    Con fecha <?php echo date('d-m-Y'); ?> he recibido de Don <strong>
-                        <span class="textposition"> <label class="names"></label></span>
-                    </strong> con DNI <strong>DNICLIENTE</strong>, y con domicilio en <strong>DOMICILIOCLIETE</strong> en concepto de empe&ntilde;o del (de los) art&iacute;culo(s):
-
-                    <label class="productsTable"></label>
-
-                    Por lo cual debe abonar la suma <strong>TOTALDEVOLVER</strong> euros, de los cuales <strong>PRECIOARTICULO</strong> euros por valor del(los) art&iacute;culo(s) y 
-                    <strong></strong> euros como el 30% del valor prestado en abono de intereses, como m&aacute;ximo el d&iacute;a <strong>
-                        <?php echo date('d-m-Y'); ?></strong>.
-                        
-                    <span class="tex-parrafo2">II.-</span> En caso de que el cliente desee conservar el(los) art&iacute;culo(s) una vez pasada esta fecha debe renovar haciendo efectivo el pago de los intereses estipulados "<strong></strong> euros", o bien el abono total retirando dicho art&iacute;culo. <br/>
-                    <span class="tex-parrafo2">III.-</span> En caso de no ser retirado ni abonado se proceder&aacute; a la venta, reciclaje, o bien lo que la empresa determine oportuno. <br/>
-                    <span class="tex-parrafo2">IV.-</span> El cliente admite haber le&iacute;do y aceptado las condiciones estipuladas anteriormente.
-                    <p>Firmando en conformidad.</p>
-                    <div class='row'>
-                        <div class='col-md-6'>
-                            <div id='signatureDiv'>
-                                <img id='signatureImage' height='150px' width='300px' src='https://cashmarkets.es/img/firma-digital.png' /><br />
-                                Firma:. <label class="names"></label><br />
-                            </div>
-                        </div>
-                        <div class='col-md-6'>
-                            <div id='signatureDiv'>
-                                <img src='img/firmaFernando.png' height='150px' width='300px' /><br />
-                                Firma:. Fernando Gonzalez<br />
-                            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>En Calle Ayala n&uacute;mero 33 bajo,
+                            <br /> Don Benito (Badajoz)
+                            <br />Movil: &Tab;642 760 330
+                            <br /> Fijo: &Tab;924 983 400
+                            <br />
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            <strong>REUNIDOS A <label class="created"></label> </strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            De una parte, Don
+                            <strong>
+                                <span class='textposition'> <label class="names"></label> </span>
+                            </strong>
+                            mayor de edad, con domicilio en
+                            <strong><label class="address"></label></strong>,
+                            con documento de identificaci&oacute;n n&uacute;mero
+                            <strong> <label class="dni"></label> 'Cliente',</strong>
+                            y de la otra parte, Don
+                            <strong> Cash Market</strong>, domiciliado en
+                            <strong> Calle Ayala n&uacute;mero 33 bajo </strong> con NIF n&uacute;mero
+                            <strong>34953215T, 'Empresa'.</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class='textposition'><strong>EXPONEN</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            <span class="tex-parrafo2">I.-</span>
+                            Con fecha <?php echo date('d/m/Y'); ?> la <strong>Empresa</strong> ha recibido del 
+                            <strong>Cliente</strong> en concepto de empe&ntilde;o del (de los) art&iacute;culo(s):</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label class="productsTable"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <P>
+                            Por lo cual el <strong>Cliente</strong> debe abonar la suma
+                            <strong><label class="total"></label></strong> euros, de los cuales
+                            <strong><label class="priceObjects"></label></strong> euros por valor del(los) art&iacute;culo(s) y
+                            <strong><label class="priceInterest"></label></strong> euros en concepto de intereses. <br/>Pagaderos como m&aacute;ximo el d&iacute;a
+                            <strong><label class="endTimeToPay"></label></strong>.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <P>
+                            <span class="tex-parrafo2">II.-</span> En caso de que el cliente desee conservar el(los) art&iacute;culo(s) una vez pasada esta fecha debe renovar haciendo efectivo el pago de los intereses estipulados "<strong><label class="priceInterest"></label></strong> euros", o bien el abono total retirando dicho art&iacute;culo. <br />
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <P>
+                            <span class="tex-parrafo2">III.-</span> En caso de no ser retirado ni abonado se proceder&aacute; a la venta, reciclaje, o bien lo que la empresa determine oportuno. <br />
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <P>
+                            <span class="tex-parrafo2">IV.-</span> El cliente admite haber le&iacute;do y aceptado las condiciones estipuladas anteriormente.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <P>
+                            <span class="tex-parrafo2">IV.-</span> Comentarios adicionales: <label class="terms"></label>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>Firmando en conformidad.</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-6'>
+                        <div id='signatureDiv'>
+                            <img id='signatureImage' height='150px' width='300px' src='https://cashmarkets.es/img/firma-digital.png' /><br />
+                            Firma:. <label class="names"></label><br />
                         </div>
                     </div>
+                    <div class='col-md-6'>
+                        <div id='signatureDiv'>
+                            <img src='img/firmaFernando.png' height='150px' width='300px' /><br />
+                            Firma:. Fernando Gonzalez<br />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class='modal-footer' id='modalAgreementsFooter'>

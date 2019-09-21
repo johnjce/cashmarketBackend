@@ -5,18 +5,18 @@ $.ajaxSetup({
 });
 
 //A la escucha de cambios en los campos de precio y porcentaje
-$("#pricePawn").on("change", function() {
+$("#pricePawn").on("change keydown keyup", function () {
     pawAvise();
 });
-$("#pawnPercent").on("change", function() {
+$("#pawnPercent").on("change keydown keyup", function () {
     pawAvise();
 });
 
 //funcion que cambia el div con el precio a devolver 
-function pawAvise(){
-    let dv = $("#pricePawn").val() * ($("#pawnPercent").val()/100 );
-    dv += parseFloat($("#pricePawn").val(),2);
-    $('#pawnAmount').html("<h4>Devuelve por este producto:"+ dv +" €</h4>");
+function pawAvise() {
+    let dv = $("#pricePawn").val() * ($("#pawnPercent").val() / 100);
+    dv += parseFloat($("#pricePawn").val(), 2);
+    $('#pawnAmount').html("<h4>Devuelve por este producto:" + dv + " €</h4>");
 }
 
 var agreementId = Math.floor(Math.random() * (4000 - 100 + 1)) + 100;
@@ -43,12 +43,11 @@ function checkInputNumber(idInput) {
 
 function delRow(id) {
     agreementPawn.delete(id);
-    alert("#p_"+id);
-    $("#p_"+id).remove();
+    $("#p_" + id).remove();
     agreementPawn.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
 }
 
-$("#buttonAddProduct").click(function () {
+$("#buttonAddProduct").on("click", function () {
     event.preventDefault();
 
     video.pause();
@@ -74,11 +73,14 @@ $("#buttonAddProduct").click(function () {
     product.set("state", $("select[name=state]").val());
     product.set("productImage", encodeURIComponent(productImage));
     agreementPawn.set(i, product);
-
-    let productHtml = "<div id='p_"+ i +"'><p><span><b>Marca: </b></span>" + $("#make").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Modelo:</b></span>"+  $("#model").val() + "</p>" +
-                      "<p><span><b>S.N.: </b></span>"+  $("#sn").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Fecha limite:</b> </span>"+  $("#lastDayOfPay").val() + "</p>" +
-                      "<p><span><b>Total: </b></span>"+  $("#pricePawn").val() + "&euro;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                      "<button type=\"button\" class=\"btn btn-success\" onclick=\"delRow("+ i +")\"><i class=\"far fa-trash-alt\"></i></button></p><hr></div>";
+    let partialPrice = $("#pricePawn").val() * ($("#pawnPercent").val() / 100);
+    partialPrice += parseFloat($("#pricePawn").val(), 2);
+    let productHtml = "<div id='p_" + i + "'>"+
+    "<p><span><b>Marca: </b></span>" + $("#make").val() + 
+    "<br/><span><b>Modelo:</b></span>" + $("#model").val() +
+    "<br/><span><b>Fecha limite:</b> </span>" + $("#lastDayOfPay").val() +
+    "<br/><span><b>Total devolder: </b></span>" + partialPrice + 
+    "<br/><button type=\"button\" class=\"btn btn-success\" onclick=\"delRow(" + i + ")\"><i class=\"far fa-trash-alt\"></i></button></p><hr></div>";
     $("#productsPda").append(productHtml);
     i++;
 
@@ -89,15 +91,16 @@ $("#buttonAddProduct").click(function () {
     $("#pricePawn").val("");
     $("#terms").val("");
     $("#pawnPercent").val("30");
+    $('#pawnAmount').html("");
 
     disableSubmit("#buttonAddProduct");
-
+    return true;
 
 });
 
 var postProducts = "{";
 function toString(value, key) {
-    delRow(1);
+    delRow(key);
     postProducts += "\"" + key + "\":{";
     value.forEach(sendProducts);
     postProducts = postProducts.substring(0, postProducts.length - 1);
@@ -117,7 +120,6 @@ $("#buttonAddAgreement").click(function () {
     var client = $.post("./customerSearch", { "q": $("#IDCL").val() });
     client.done(function (data) {
         var jdata = JSON.parse(data);
-        var x = "";
         names = jdata[0].names + " " + jdata[0].lastname;
         address = jdata[0].address;
         dni = jdata[0].dni;
@@ -137,16 +139,16 @@ $("#buttonAddAgreement").click(function () {
         document.querySelector('#customersResult').innerHTML = "";
         postProducts = "{";
         disableSubmit("#buttonAddAgreement");
-        
+
         let documento = "<div class='modal-footer'>" +
-        "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
-        "    <!-- boton de capturar firma -->" +
-        "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
-        '<div class="row">' +
-        '<div class="col-md-6">' +
-        '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
-        '</div>';
-            
+            "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
+            "    <!-- boton de capturar firma -->" +
+            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
+            '<div class="row">' +
+            '<div class="col-md-6">' +
+            '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
+            '</div>';
+
         document.querySelector('#modalAgreementsFooter').innerHTML = documento;
 
         document.querySelector('#message').innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>" +
@@ -170,6 +172,7 @@ $("#buttonAddAgreement").click(function () {
 $("#addProductForm *").on("change keydown keyup", function () {
     if (checkInput("#make") &&
         checkInput("#model") &&
+        checkInput("#lastDayOfPay") &&
         checkInput("#sn") &&
         checkInputNumber("#pricePawn") &&
         checkInputNumber("#pawnPercent")) {

@@ -28,7 +28,6 @@ function checkInputNumber(idInput) {
 
 function delRow(id) {
     agreementPurchase.delete(id);
-    alert("#p_"+id);
     $("#p_"+id).remove();
     agreementPurchase.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
 }
@@ -82,7 +81,7 @@ $("#buttonAddProduct").click(function () {
 
 var postProducts = "{";
 function toString(value, key) {
-    delRow(1);
+    delRow(key);
     postProducts += "\"" + key + "\":{";
     value.forEach(sendProducts);
     postProducts = postProducts.substring(0, postProducts.length - 1);
