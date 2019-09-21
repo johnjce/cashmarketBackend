@@ -29,8 +29,7 @@ class CustomerController extends Controller
         
     public function seeCustomers(){
         $customers = Customer::all();
-        dd($customers);
-        //return view('CustomerList',compact('customers'));
+        return view('CustomerList',compact('customers'));
     }
 
     public function save(Request $request){
