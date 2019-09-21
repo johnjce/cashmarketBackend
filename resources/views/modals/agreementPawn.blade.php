@@ -58,8 +58,7 @@
                     <div class="col-12">
                         <p>
                             <span class="tex-parrafo2">I.-</span>
-                            Con fecha <?php echo date('d/m/Y'); ?> la <strong>Empresa</strong> ha recibido del 
-                            <strong>Cliente</strong> en concepto de empe&ntilde;o del (de los) art&iacute;culo(s):</p>
+                            Con fecha <?php echo date('d/m/Y'); ?> la <strong>Empresa</strong> ha recibido del <strong>Cliente</strong> en concepto de empe&ntilde;o del (de los) art&iacute;culo(s):</p>
                     </div>
                 </div>
                 <div class="row">
@@ -102,7 +101,7 @@
                 <div class="row">
                     <div class="col-12">
                         <P>
-                            <span class="tex-parrafo2">IV.-</span> Comentarios adicionales: <label class="terms"></label>
+                            <span class="tex-parrafo2">IV.-</span> Comentarios adicionales: <label class="terms"></label>.
                         </p>
                     </div>
                 </div>

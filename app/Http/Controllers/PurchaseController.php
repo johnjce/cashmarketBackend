@@ -40,7 +40,7 @@ class PurchaseController extends Controller {
                      'lrvds.documentId', 
                      'lrvds.signatureCustomer',
                      'products.*')
-            ->orderBy('lrvds.created_at', 'desc')
+            ->orderBy('lrvds.created_at', 'asc')
             ->get();
     }
 

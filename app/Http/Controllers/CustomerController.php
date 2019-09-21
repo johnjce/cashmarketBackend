@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends Controller
