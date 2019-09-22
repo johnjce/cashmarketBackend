@@ -36,11 +36,11 @@ $("#buttonAddProduct").click(function () {
     event.preventDefault();
 
     video.pause();
-    let contexto = canvasproducPicture.getContext("2d");
-    canvasproducPicture.width = video.videoWidth;
-    canvasproducPicture.height = video.videoHeight;
-    contexto.drawImage(video, 0, 0, canvasproducPicture.width, canvasproducPicture.height);
-    let productImage = canvasproducPicture.toDataURL();
+    let contexto = canvasProductPicture.getContext("2d");
+    canvasProductPicture.width = video.videoWidth;
+    canvasProductPicture.height = video.videoHeight;
+    contexto.drawImage(video, 0, 0, canvasProductPicture.width, canvasProductPicture.height);
+    let productImage = canvasProductPicture.toDataURL();
     // let signaturePicture = signaturePictureCanvas.toDataURL();
 
     video.play();
@@ -174,7 +174,7 @@ function _getUserMedia() {
 }
 
 let video = document.querySelector("#video"),
-    canvasproducPicture = document.querySelector("#canvasproducPicture"),
+    canvasProductPicture = document.querySelector("#canvasProductPicture"),
     deviceList = document.querySelector("#deviceList");
 
 let setDeviceList = () => {

@@ -4,10 +4,46 @@ $.ajaxSetup({
     }
 });
 
+//A la escucha de cambios en los campos de precio y porcentaje
+$("#priceDownPayment").on("change keydown keyup", function () {
+    if($("#priceDownPayment").val() == ""){
+        $("#priceDownPayment").val(0);
+    }
+    $("#priceDownPayment").val($("#priceDownPayment").val()*1.00);
+    downPaymentAvise();
+});
+$("#downPaymentPercent").on("change keydown keyup", function () {
+    downPaymentAvise();
+});
+
+
+//funcion que agrega un mes a la fecha
+function calculateOneMonthMore(){
+    let actualDate = new Date();
+    let actualMonth = actualDate.getMonth();
+    let newMonth = actualMonth + 2;
+    newMonth -= newMonth>12?12:0;
+    let lastDate = actualDate.getDate() + "/" + newMonth + "/" + actualDate.getFullYear();
+    return lastDate;
+}
+$("#lastDayOfPay").val(calculateOneMonthMore());
+
+//funcion que cambia el div con el precio a devolver 
+function downPaymentAvise() {
+    let percent = $("#downPaymentPercent").val();
+    let price = $("#priceDownPayment").val();
+    console.log(price +percent);
+    let dv = price==null||percent==null?0:parseFloat(price * (percent / 100)) + parseFloat(price, 2);
+    console.log(dv);
+    $('#downPaymentAmount').html("<h4>Devuelve por este producto:" + dv + " €</h4>");
+}
+
 var agreementId = Math.floor(Math.random() * (4000 - 100 + 1)) + 100;
-var agreementPurchase = new Map();
+var agreementDownPayment = new Map();
 var productsPda = document.getElementById("productsPda");
 var i = 0;
+let total = 0;
+
 
 function enableSubmit(idButton) {
     $(idButton).removeAttr("disabled");
@@ -27,61 +63,14 @@ function checkInputNumber(idInput) {
 }
 
 function delRow(id) {
-    agreementPurchase.delete(id);
-    $("#p_"+id).remove();
-    agreementPurchase.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
+    agreementDownPayment.delete(id);
+    $("#p_" + id).remove();
+    agreementDownPayment.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
 }
-
-$("#buttonAddProduct").on('click', function () {
-    event.preventDefault();
-
-    video.pause();
-    let contexto = canvasproducPicture.getContext("2d");
-    canvasproducPicture.width = video.videoWidth;
-    canvasproducPicture.height = video.videoHeight;
-    contexto.drawImage(video, 0, 0, canvasproducPicture.width, canvasproducPicture.height);
-    let productImage = canvasproducPicture.toDataURL();
-    // let signaturePicture = signaturePictureCanvas.toDataURL();
-
-    video.play();
-
-
-
-    enableSubmit("#buttonAddAgreement");
-    var product = new Map();
-    product.set("make", $("#make").val());
-    product.set("model", $("#model").val());
-    product.set("sn", $("#sn").val());
-    product.set("type", $("select[name=type]").val());
-    product.set("pricePurchase", $("#pricePurchase").val());
-    product.set("priceSale", $("#priceSale").val());
-    product.set("stock", $("#stock").val());
-    product.set("state", $("select[name=state]").val());
-    product.set("productImage", encodeURIComponent(productImage));
-    agreementPurchase.set(i, product);
-
-    let productHtml = "<div id='p_"+ i +"'><p><span><b>Marca: </b></span>" + $("#make").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Modelo:</b></span>"+  $("#model").val() + "</p>" +
-                      "<p><span><b>S.N.: </b></span>"+  $("#sn").val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Cantidad:</b> </span>"+  $("#stock").val() + "</p>" +
-                      "<p><span><b>Total: </b></span>"+  $("#stock").val() * $("#pricePurchase").val() + "&euro;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                      "<button type=\"button\" class=\"btn btn-success\" onclick=\"delRow("+ i +")\"><i class=\"far fa-trash-alt\"></i></button></p><hr></div>";
-    $("#productsPda").append(productHtml);
-    i++;
-
-    $("#make").val("");
-    $("#model").val("");
-    $("#sn").val("");
-    $("#stock").val(1);
-    $("#pricePurchase").val("");
-    $("#priceSale").val("");
-
-    disableSubmit("#buttonAddProduct");
-return true;
-
-});
 
 var postProducts = "{";
 function toString(value, key) {
-    delRow(1);
+    delRow(key);
     postProducts += "\"" + key + "\":{";
     value.forEach(sendProducts);
     postProducts = postProducts.substring(0, postProducts.length - 1);
@@ -98,8 +87,8 @@ $("#buttonAddAgreement").click(function () {
         document.querySelector('#message').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!</strong> Existe un problema, porfavor revise si selecciono un cliente e intentelo de nuevo.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
         return false;
     }
-    var client = $.post("./customerSearch", { "q": $("#IDCL").val() });
-    client.done(function (data) {
+    $.post("./customerSearch", { "q": $("#IDCL").val() })
+    .done(function (data) {
         var jdata = JSON.parse(data);
         names = jdata[0].names + " " + jdata[0].lastname;
         address = jdata[0].address;
@@ -107,29 +96,32 @@ $("#buttonAddAgreement").click(function () {
         telephone = jdata[0].telephone;
     });
 
-    agreementPurchase.forEach(toString);
+    agreementDownPayment.forEach(toString);
     postProducts = postProducts.substring(0, postProducts.length - 1);
     postProducts += "}";
-    var posting = $.post("./savePurchase", {
+    var posting = $.post("./saveDownPayment", {
         "products": jQuery.parseJSON(postProducts),
         "IDCL": $("#IDCL").val(),
-        "total": 145
+        "total": total,
+        "agreementId":agreementId,
+        "terms": $("#terms").val(),
+        "lastDayOfPay": $("#lastDayOfPay").val()
     });
     posting.done(function (data) {
         $("#inputSearch").val("");
         document.querySelector('#customersResult').innerHTML = "";
         postProducts = "{";
         disableSubmit("#buttonAddAgreement");
-        
+
         let documento = "<div class='modal-footer'>" +
-        "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
-        "    <!-- boton de capturar firma -->" +
-        "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
-        '<div class="row">' +
-        '<div class="col-md-6">' +
-        '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
-        '</div>';
-            
+            "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
+            "    <!-- boton de capturar firma -->" +
+            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
+            '<div class="row">' +
+            '<div class="col-md-6">' +
+            '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
+            '</div>';
+
         document.querySelector('#modalAgreementsFooter').innerHTML = documento;
 
         document.querySelector('#message').innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>" +
@@ -142,7 +134,7 @@ $("#buttonAddAgreement").click(function () {
             "        <span aria-hidden='true'>&times;</span>" +
             "    </button>" +
             "</div>";
-        agreementPurchase = new Map();
+        agreementDownPayment = new Map();
     });
     posting.fail(function (data) {
         document.querySelector('#message').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!</strong> Existe un problema, porfavor revise el formulario e intentelo de nuevo.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -154,14 +146,60 @@ $("#addProductForm *").on("change keydown keyup", function () {
     if (checkInput("#make") &&
         checkInput("#model") &&
         checkInput("#sn") &&
-        checkInputNumber("#pricePurchase") &&
-        checkInputNumber("#priceSale")) {
+        checkInputNumber("#priceDownPayment") &&
+        checkInputNumber("#downPaymentPercent")) {
         enableSubmit("#buttonAddProduct");
     } else {
         disableSubmit("#buttonAddProduct");
     }
 });
+$("#buttonAddProduct").on("click", function () {
+    event.preventDefault();
 
+    video.pause();
+    let contexto = canvasProductPicture.getContext("2d");
+    canvasProductPicture.width = video.videoWidth;
+    canvasProductPicture.height = video.videoHeight;
+    contexto.drawImage(video, 0, 0, canvasProductPicture.width, canvasProductPicture.height);
+    let productImage = canvasProductPicture.toDataURL();
+    video.play();
+    
+    enableSubmit("#buttonAddAgreement");
+    var product = new Map();
+    product.set("make", $("#make").val());
+    product.set("model", $("#model").val());
+    product.set("sn", $("#sn").val());
+    product.set("type", $("select[name=type]").val());
+    product.set("pricePurchase", $("#priceDownPayment").val());
+    product.set("priceSale", $("#downPaymentPercent").val());
+    product.set("state", $("select[name=state]").val());
+    product.set("productImage", encodeURIComponent(productImage));
+    agreementDownPayment.set(i, product);
+    let partialPrice = $("#priceDownPayment").val() * ($("#downPaymentPercent").val() / 100);
+    partialPrice += parseFloat($("#priceDownPayment").val(), 2);
+    total += $("#priceDownPayment").val();
+    let productHtml = "<div id='p_" + i + "' class='col-lg-6 col-sm-12 col-md-12 mb-0'>"+
+    "<p><span><b>Marca: </b></span>" + $("#make").val() + 
+    "<br/><span><b>Modelo:</b></span>" + $("#model").val() +
+    "<br/><span><b>Fecha limite:</b> </span>" + $("#lastDayOfPay").val() +
+    "<br/><span><b>Total devolder: </b></span>" + partialPrice + 
+    "<br/><button type=\"button\" class=\"btn btn-success\" onclick=\"delRow(" + i + ")\"><i class=\"far fa-trash-alt\"></i></button></p><hr></div>";
+    $("#productsPda").append(productHtml);
+    i++;
+
+    $("#make").val("");
+    $("#model").val("");
+    $("#sn").val("");
+    $("#stock").val(1);
+    $("#priceDownPayment").val("");
+    //$("#terms").val("");
+    $("#downPaymentPercent").val("30");
+    $('#downPaymentAmount').html("");
+
+    disableSubmit("#buttonAddProduct");
+    return true;
+
+});
 //de aqui para abajo la puta camara
 
 function isUserMediaSupport() {
@@ -173,7 +211,7 @@ function _getUserMedia() {
 }
 
 let video = document.querySelector("#video"),
-    canvasproducPicture = document.querySelector("#canvasproducPicture"),
+    canvasProductPicture = document.querySelector("#canvasProductPicture"),
     deviceList = document.querySelector("#deviceList");
 
 let setDeviceList = () => {
@@ -199,8 +237,6 @@ let setDeviceList = () => {
             }
         });
 }
-
-
 
 
 (function () {

@@ -11,15 +11,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oxygen:400,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?php echo asset('css/frontGeneral/animate.css') ?>">
-    <link rel="stylesheet" href="<?php echo asset('css/frontGeneral/owl.carousel.min.css') ?>">
-    <link rel="stylesheet" href="<?php echo asset('css/frontGeneral/jquery.fancybox.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo secure_asset('css/frontGeneral/animate.css') ?>">
+    <link rel="stylesheet" href="<?php echo secure_asset('css/frontGeneral/owl.carousel.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo secure_asset('css/frontGeneral/jquery.fancybox.min.css') ?>">
 
-    <link rel="stylesheet" href="<?php echo asset('fonts/ionicons/css/ionicons.min.css') ?>">
-    <link rel="stylesheet" href="<?php echo asset('fonts/fontawesome/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo secure_asset('fonts/ionicons/css/ionicons.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo secure_asset('fonts/fontawesome/css/font-awesome.min.css') ?>">
 
     <!-- Theme Style -->
-    <link rel="stylesheet" href="{{ asset('css/frontGeneral/style.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/frontGeneral/style.css') }}">
 </head>
 
 <body>

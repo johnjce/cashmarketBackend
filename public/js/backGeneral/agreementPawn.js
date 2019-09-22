@@ -6,18 +6,30 @@ $.ajaxSetup({
 
 //A la escucha de cambios en los campos de precio y porcentaje
 $("#pricePawn").on("change keydown keyup", function () {
-    pawAvise();
+    panwAvise();
 });
 $("#pawnPercent").on("change keydown keyup", function () {
-    pawAvise();
+    panwAvise();
 });
 
 //funcion que cambia el div con el precio a devolver 
-function pawAvise() {
+function panwAvise() {
     let dv = $("#pricePawn").val() * ($("#pawnPercent").val() / 100);
     dv += parseFloat($("#pricePawn").val(), 2);
     $('#pawnAmount').html("<h4>Devuelve por este producto:" + dv + " €</h4>");
 }
+
+//funcion que agrega un mes a la fecha
+function calculateOneMonthMore(){
+    let actualDate = new Date();
+    let actualMonth = actualDate.getMonth();
+    let newMonth = actualMonth + 2;
+    newMonth -= newMonth>12?12:0;
+    let lastDate = actualDate.getDate() + "/" + newMonth + "/" + actualDate.getFullYear();
+    return lastDate;
+}
+$("#lastDayOfPay").val(calculateOneMonthMore());
+
 
 var agreementId = Math.floor(Math.random() * (4000 - 100 + 1)) + 100;
 var agreementPawn = new Map();
@@ -51,11 +63,11 @@ $("#buttonAddProduct").on("click", function () {
     event.preventDefault();
 
     video.pause();
-    let contexto = canvasproducPicture.getContext("2d");
-    canvasproducPicture.width = video.videoWidth;
-    canvasproducPicture.height = video.videoHeight;
-    contexto.drawImage(video, 0, 0, canvasproducPicture.width, canvasproducPicture.height);
-    let productImage = canvasproducPicture.toDataURL();
+    let contexto = canvasProductPicture.getContext("2d");
+    canvasProductPicture.width = video.videoWidth;
+    canvasProductPicture.height = video.videoHeight;
+    contexto.drawImage(video, 0, 0, canvasProductPicture.width, canvasProductPicture.height);
+    let productImage = canvasProductPicture.toDataURL();
     // let signaturePicture = signaturePictureCanvas.toDataURL();
 
     video.play();
@@ -193,7 +205,7 @@ function _getUserMedia() {
 }
 
 let video = document.querySelector("#video"),
-    canvasproducPicture = document.querySelector("#canvasproducPicture"),
+    canvasProductPicture = document.querySelector("#canvasProductPicture"),
     deviceList = document.querySelector("#deviceList");
 
 let setDeviceList = () => {

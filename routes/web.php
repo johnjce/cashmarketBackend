@@ -36,7 +36,7 @@ Route::post('/purchaseAgreementData', 'PurchaseController@purchaseAgreementData'
 Route::get('/PurchaseList', 'PurchaseController@purchaseList')->name('PurchaseList');
 
 Route::get('/newDownPayment', 'DownPaymentController@newDownPayment')->name('DownPayment');
-//Route::post('/saveDownPayment', 'DownPaymentController@downPaymentAdd')->name('SaveDownPayment');
+Route::post('/saveDownPayment', 'DownPaymentController@downPaymentAdd')->name('SaveDownPayment');
 Route::get('/DownPaymentList', 'DownPaymentController@downPaymentList')->name('DownPaymentList');
 
 Route::get('/newPawn', 'PawnController@newPawn')->name('Pawn');
