@@ -176,13 +176,13 @@
 @endsection
 
 @section('scriptsFirma')
-<link rel="stylesheet" type="text/css" href="{{ asset('js/backGeneral/customer/signature/signatureButtons.css') }}" defer />
+<link rel="stylesheet" type="text/css" href="{{ asset('js/backGeneral/signature/signatureButtons.css') }}" defer />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/BigInt.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/sjcl.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/signatureButtons_encryption.js') }}" defer></script>
-<script src="{{ asset('js/backGeneral/customer/signature/q.js') }}" defer charset="UTF-8"></script>
-<script src="{{ asset('js/backGeneral/customer/signature/wgssStuSdk.js') }}" defer charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('js/backGeneral/signature/BigInt.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/backGeneral/signature/sjcl.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/backGeneral/signature/signatureButtons_encryption.js') }}" defer></script>
+<script src="{{ asset('js/backGeneral/signature/q.js') }}" defer charset="UTF-8"></script>
+<script src="{{ asset('js/backGeneral/signature/wgssStuSdk.js') }}" defer charset="UTF-8"></script>
 <script>
   var m_btns; // The array of buttons that we are emulating.
   var m_clickBtn = -1;

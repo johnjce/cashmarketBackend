@@ -4,6 +4,14 @@ $.ajaxSetup({
     }
 });
 
+
+var agreementId = Math.floor(Math.random() * (4000 - 100 + 1)) + 100;
+var agreementDownPayment = new Map();
+var productsPda = document.getElementById("productsPda");
+var i = 0;
+let total = 0;
+var postProducts = "{";
+
 //A la escucha de cambios en los campos de precio y porcentaje
 $("#priceDownPayment").on("change keydown keyup", function () {
     if($("#priceDownPayment").val() == ""){
@@ -16,18 +24,6 @@ $("#downPaymentPercent").on("change keydown keyup", function () {
     downPaymentAvise();
 });
 
-
-//funcion que agrega un mes a la fecha
-function calculateOneMonthMore(){
-    let actualDate = new Date();
-    let actualMonth = actualDate.getMonth();
-    let newMonth = actualMonth + 2;
-    newMonth -= newMonth>12?12:0;
-    let lastDate = actualDate.getDate() + "/" + newMonth + "/" + actualDate.getFullYear();
-    return lastDate;
-}
-$("#lastDayOfPay").val(calculateOneMonthMore());
-
 //funcion que cambia el div con el precio a devolver 
 function downPaymentAvise() {
     let percent = $("#downPaymentPercent").val();
@@ -36,39 +32,11 @@ function downPaymentAvise() {
     $('#downPaymentAmount').html("<h4>Devuelve por este producto:" + dv + " €</h4>");
 }
 
-var agreementId = Math.floor(Math.random() * (4000 - 100 + 1)) + 100;
-var agreementDownPayment = new Map();
-var productsPda = document.getElementById("productsPda");
-var i = 0;
-let total = 0;
-
-
-function enableSubmit(idButton) {
-    $(idButton).removeAttr("disabled");
-}
-
-function disableSubmit(idButton) {
-    $(idButton).attr("disabled", true);
-}
-
-function checkInput(idInput) {
-    return $(idInput).val() != "" ? true : false;
-}
-
-function checkInputNumber(idInput) {
-    var patt = new RegExp("[^0-9]");
-    return checkInput(idInput) ? !patt.test($(idInput).val()) : false;
-}
-
-function delRow(id) {
-    agreementDownPayment.delete(id);
-    $("#p_" + id).remove();
-    agreementDownPayment.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
-}
-
+//funcion que recoge los productos para enviarlos
 $("#buttonAddProduct").on("click", function () {
     event.preventDefault();
 
+    //capturo la imagen del producto
     video.pause();
     let contexto = canvasProductPicture.getContext("2d");
     canvasProductPicture.width = video.videoWidth;
@@ -77,7 +45,7 @@ $("#buttonAddProduct").on("click", function () {
     let productImage = canvasProductPicture.toDataURL();
     video.play();
     
-    enableSubmit("#buttonAddAgreement");
+    // agrego producto en mapa
     var product = new Map();
     product.set("make", $("#make").val());
     product.set("model", $("#model").val());
@@ -87,10 +55,15 @@ $("#buttonAddProduct").on("click", function () {
     product.set("pawnPercent", $("#downPaymentPercent").val());
     product.set("state", $("select[name=state]").val());
     product.set("productImage", encodeURIComponent(productImage));
+
+    //meto el producto al array de productos
     agreementDownPayment.set(i, product);
+
     let partialPrice = $("#priceDownPayment").val() * ($("#downPaymentPercent").val() / 100);
     partialPrice += parseFloat($("#priceDownPayment").val(), 2);
     total += parseFloat($("#priceDownPayment").val(), 2);
+
+    //muestro el producto en la PDA
     let productHtml = "<div id='p_" + i + "' class='col-lg-6 col-sm-12 col-md-12 mb-0'>"+
     "<p><span><b>Marca: </b></span>" + $("#make").val() + 
     "<br/><span><b>Modelo:</b></span>" + $("#model").val() +
@@ -99,6 +72,8 @@ $("#buttonAddProduct").on("click", function () {
     "<br/><button type=\"button\" class=\"btn btn-success\" onclick=\"delRow(" + i + ")\"><i class=\"far fa-trash-alt\"></i></button></p><hr></div>";
     $("#productsPda").append(productHtml);
     i++;
+    
+    //reset de valores de producto
     $("#make").val("");
     $("#model").val("");
     $("#sn").val("");
@@ -106,31 +81,23 @@ $("#buttonAddProduct").on("click", function () {
     $("#priceDownPayment").val("");
     $("#downPaymentPercent").val("30");
     $('#downPaymentAmount').html("");
-
+    
+    //activo botón crear contrato, descativo agregar producto
+    enableSubmit("#buttonAddAgreement");
     disableSubmit("#buttonAddProduct");
     return true;
 
 });
 
-var postProducts = "{";
-function toString(value, key) {
-    delRow(key);
-    postProducts += "\"" + key + "\":{";
-    value.forEach(sendProducts);
-    postProducts = postProducts.substring(0, postProducts.length - 1);
-    postProducts += "},";
-}
-
-function sendProducts(value, key, map) {
-    postProducts += `"${key}":"${value}",`;
-}
-
+//se encarga de crear el contrato
 $("#buttonAddAgreement").click(function () {
     event.preventDefault();
+    //si no esta el cliente le aviso
     if ($("#IDCL").val() == null) {
         document.querySelector('#message').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!</strong> Existe un problema, porfavor revise si selecciono un cliente e intentelo de nuevo.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
         return false;
     }
+    //obtengo los datos del cliente 
     $.post("./customerSearch", { "q": $("#IDCL").val() })
     .done(function (data) {
         var jdata = JSON.parse(data);
@@ -139,6 +106,7 @@ $("#buttonAddAgreement").click(function () {
         dni = jdata[0].dni;
         telephone = jdata[0].telephone;
     });
+    
 
     agreementDownPayment.forEach(toString);
     postProducts = postProducts.substring(0, postProducts.length - 1);
@@ -187,6 +155,7 @@ $("#buttonAddAgreement").click(function () {
 
 });
 
+//validador que esta a la espera de que se pueda crear producto para guardarlo
 $("#addProductForm *").on("change keydown keyup", function () {
     if (checkInput("#make") &&
         checkInput("#model") &&
@@ -198,100 +167,3 @@ $("#addProductForm *").on("change keydown keyup", function () {
         disableSubmit("#buttonAddProduct");
     }
 });
-//de aqui para abajo la puta camara
-
-function isUserMediaSupport() {
-    return !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
-}
-
-function _getUserMedia() {
-    return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
-}
-
-let video = document.querySelector("#video"),
-    canvasProductPicture = document.querySelector("#canvasProductPicture"),
-    deviceList = document.querySelector("#deviceList");
-
-let setDeviceList = () => {
-    navigator
-        .mediaDevices
-        .enumerateDevices()
-        .then(function (devices) {
-            let videoDevice = [];
-            devices.forEach(function (dispositivo) {
-                let tipo = dispositivo.kind;
-                if (tipo === "videoinput") {
-                    videoDevice.push(dispositivo);
-                }
-            });
-
-            if (videoDevice.length > 0) {
-                videoDevice.forEach(dispositivo => {
-                    let option = document.createElement("option");
-                    option.value = dispositivo.deviceId;
-                    option.text = dispositivo.label;
-                    deviceList.appendChild(option);
-                });
-            }
-        });
-}
-
-
-(function () {
-    if (!isUserMediaSupport()) {
-        alert("Su navegador no acepta la captura de imagenes.");
-        $("#state").text("Parece que tu navegador no soporta esta característica. Intenta actualizarlo.");
-        return;
-    }
-
-
-    let stream;
-
-    navigator
-        .mediaDevices
-        .enumerateDevices()
-        .then(function (devices) {
-            let videoDevice = [];
-
-            devices.forEach(function (dispositivo) {
-                let tipo = dispositivo.kind;
-                if (tipo === "videoinput") {
-                    videoDevice.push(dispositivo);
-                }
-            });
-
-            if (videoDevice.length > 0) {
-                showStream(videoDevice[0].deviceId);
-            }
-        });
-
-
-
-    let showStream = idDeDispositivo => {
-        _getUserMedia(
-            {
-                video: {
-                    deviceId: idDeDispositivo,
-                    width: 300,
-                    height: 200
-                }
-            },
-            function (streamObtenido) {
-                setDeviceList();
-
-                deviceList.onchange = () => {
-                    if (stream) {
-                        stream.getTracks().forEach(function (track) {
-                            track.stop();
-                        });
-                    }
-                    showStream(deviceList.value);
-                }
-                stream = streamObtenido;
-                video.srcObject = stream;
-                video.play();
-            }, function (error) {
-                $("#state").text("No se puede acceder a la cámara, o no le diste permiso.");
-            });
-    }
-})();
