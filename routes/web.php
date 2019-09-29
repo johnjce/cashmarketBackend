@@ -39,6 +39,8 @@ Route::get('/newDownPayment', 'DownPaymentController@newDownPayment')->name('Dow
 Route::post('/saveDownPayment', 'DownPaymentController@downPaymentAdd')->name('SaveDownPayment');
 Route::get('/DownPaymentList', 'DownPaymentController@downPaymentList')->name('DownPaymentList');
 
+Route::post('/updateSignature', 'HomeController@updateSignature')->name('updateSignature');
+
 Route::get('/newPawn', 'PawnController@newPawn')->name('Pawn');
 Route::post('/savePawn', 'PawnController@pawnAdd')->name('SavePawn');
 Route::get('/PawnList', 'PawnController@pawnList')->name('PawnList');

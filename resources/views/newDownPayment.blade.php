@@ -257,7 +257,7 @@
 
     function print() {}
 
-    function printDocument(divId) {
+    function printDocument(aaa) {
         var ventana = window.open("", "", "");
         var contenido = "<head>" +
             "<link href='https://cashmarkets.es/css/backGeneral/sb-admin.css' rel='stylesheet'>" +

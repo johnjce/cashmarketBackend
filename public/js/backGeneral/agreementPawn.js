@@ -155,10 +155,10 @@ $("#buttonAddAgreement").click(function () {
         let documento = "<div class='modal-footer'>" +
             "    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>" +
             "    <!-- boton de capturar firma -->" +
-            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this)'>Imprimir</a>" +
+            "    <a class='btn btn-primary' id='printAgreementButton' href='#' onclick='printDocument(this); updateSignature(\"" + data + "\");'>Imprimir</a>" +
             '<div class="row">' +
             '<div class="col-md-6">' +
-            '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletDemo()">Firmar <i class="fas fa-signature"></i></button>' +
+            '<button id="signButton" value="Firmar" class="btn btn-primary btn-lg ligth-text block" onClick="tabletSignature()">Firmar <i class="fas fa-signature"></i></button>' +
             '</div>';
 
         document.querySelector('#modalAgreementsFooter').innerHTML = documento;

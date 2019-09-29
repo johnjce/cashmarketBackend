@@ -201,11 +201,11 @@
 @section('scriptsFirma')
 <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.standalone.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('js/backGeneral/customer/signature/demoButtons.css') }}" defer />
+<link rel="stylesheet" type="text/css" href="{{ asset('js/backGeneral/customer/signature/signatureButtons.css') }}" defer />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/BigInt.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/sjcl.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/demoButtons_encryption.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/backGeneral/customer/signature/signatureButtons_encryption.js') }}" defer></script>
 <script src="{{ asset('js/backGeneral/customer/signature/q.js') }}" defer charset="UTF-8"></script>
 <script src="{{ asset('js/backGeneral/customer/signature/wgssStuSdk.js') }}" defer charset="UTF-8"></script>
 
@@ -253,13 +253,13 @@
 
     function onDCAtimeout() {
         // Device Control App has timed-out and shut down
-        // For this sample, we just closedown tabletDemo (assumking it's running)
+        // For this sample, we just closedown tableSignature (assumking it's running)
         console.log("DCA disconnected");
         setTimeout(close, 0);
     }
 
 
-    function printDocument(divId) {
+    function printDocument(aaa) {
         var ventana = window.open("", "", "");
         var contenido = "<head>" +
             "<link href='https://39027243.servicio-online.net/css/backGeneral/sb-admin.css' rel='stylesheet'>" +
@@ -385,7 +385,7 @@
     function DCANotReady() {}
     DCANotReady.prototype = new Error();
 
-    function tabletDemo() {
+    function tabletSignature() {
         $("#ModalAgreements").modal('toggle');
         var p = new WacomGSS.STU.Protocol();
         var intf;
@@ -612,10 +612,10 @@
                     // Device Control App not detected 
                     // Reinitialize and re-try
                     WacomGSS.STU.Reinitialize();
-                    setTimeout(tabletDemo, 1000);
+                    setTimeout(tabletSignature, 1000);
                 } else {
                     // Some other error - Inform the user and closedown 
-                    alert("tabletDemo failed:\n" + ex);
+                    alert("tabletSignature failed:\n" + ex);
                     setTimeout(close(), 0);
                 }
             });
