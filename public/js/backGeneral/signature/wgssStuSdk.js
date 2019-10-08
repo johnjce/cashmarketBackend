@@ -82,7 +82,7 @@ WacomGSS.STUConstructor = (function() {
       deferred.resolve(false);
     }
     else {
-      setTimeout(function () {
+      setTimeout(()=> {
                    if(deferred.promise.isPending()) {
                      if(WacomGSS.STU.isServiceReady()) {
                        WacomGSS.STU.close();
@@ -208,7 +208,7 @@ WacomGSS.STUConstructor = (function() {
            });
   }
   
-  STU.prototype.getTlsDevices = function () {
+  STU.prototype.getTlsDevices = ()=> {
     return WacomGSS.STU.send
            ({
              "scope": "WacomGSS.STU.GetTlsDevices",
@@ -263,7 +263,7 @@ WacomGSS.STUConstructor = (function() {
     function UsbInterface() {
     }
     
-    UsbInterface.prototype.Constructor = function () {
+    UsbInterface.prototype.Constructor = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope, 
@@ -725,7 +725,7 @@ WacomGSS.STUConstructor = (function() {
       return intf;
     }
     
-    Protocol.prototype.getInformation = function () {
+    Protocol.prototype.getInformation = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope, 
@@ -734,7 +734,7 @@ WacomGSS.STUConstructor = (function() {
           });
     }
     
-    Protocol.prototype.getPenDataOptionMode = function () {
+    Protocol.prototype.getPenDataOptionMode = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope, 
@@ -753,7 +753,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
     
-    Protocol.prototype.OperationMode_Normal = (function () {
+    Protocol.prototype.OperationMode_Normal = (()=> {
       function OperationMode_Normal() {
         this.operationMode = 0x00; // Protocol.OperationModeType.OperationModeType_Normal
         this.data = [];
@@ -769,7 +769,7 @@ WacomGSS.STUConstructor = (function() {
     // numberHiddenMode 0=disable, 1=enable (number is changed to *)
     // idAfterEnter     0=blank screen; 1-6 message box screen
     // idAfterCancel    0=blank screen; 1-6 message box screen
-    Protocol.prototype.OperationMode_PinPad = (function () {
+    Protocol.prototype.OperationMode_PinPad = (()=> {
       function OperationMode_PinPad(screenSelect, pinBypass, minDigit, maxDigit, numberHiddenMode, idAfterEnter, idAfterCancel) {
         this.operationMode = 0x01; // Protocol.OperationModeType.OperationModeType_PinPad
         this.data = [];
@@ -791,7 +791,7 @@ WacomGSS.STUConstructor = (function() {
     // numberOfSlides   2..10 number of slides to show
     // slideNumber      array of numbers of slides to show
     // interval         2..120 interval in seconds.
-    Protocol.prototype.OperationMode_SlideShow = (function () {
+    Protocol.prototype.OperationMode_SlideShow = (()=> {
       function OperationMode_SlideShow(workingMode, numberOfSlides, slideNumber, interval) {
         this.operationMode = 0x02;    // Protocol.OperationModeType.OperationModeType_SlideShow,
         this.data = [];
@@ -834,7 +834,7 @@ WacomGSS.STUConstructor = (function() {
     // keyDefinition    0=Cancel; 1=Enter; 2=Clear. The 3 keys must be defined differently
     // idAfterEnter     0=blank screen; 1-6 message box screen
     // idAfterCancel    0=blank screen; 1-6 message box screen
-    Protocol.prototype.OperationMode_Signature = (function () {
+    Protocol.prototype.OperationMode_Signature = (()=> {
       function OperationMode_Signature(signatureScreen, keyDefinition, idAfterEnter, idAfterCancel) {
         this.operationMode = 0x04;    // Protocol.OperationModeType.OperationModeType_Signature,
         this.data = [];
@@ -860,7 +860,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Protocol.prototype.getOperationMode = function () {
+    Protocol.prototype.getOperationMode = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -869,7 +869,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Protocol.prototype.RomStartImageData_PinPad = (function () {
+    Protocol.prototype.RomStartImageData_PinPad = (()=> {
       // encodingMode Protocol.EncodingMode (must be 24-bit)
       // imageType    false=not pushed; true=pushed 
       // imageNumber  1..3
@@ -886,7 +886,7 @@ WacomGSS.STUConstructor = (function() {
       return RomStartImageData_PinPad;
     })();
 
-    Protocol.prototype.RomStartImageData_SlideShow = (function () {
+    Protocol.prototype.RomStartImageData_SlideShow = (()=> {
       // encodingMode Protocol.EncodingMode (must be 24-bit)
       // imageType    not used
       // imageNumber  1..10
@@ -901,7 +901,7 @@ WacomGSS.STUConstructor = (function() {
       return RomStartImageData_SlideShow;
     })();
 
-    Protocol.prototype.RomStartImageData_KeyPad = (function () {
+    Protocol.prototype.RomStartImageData_KeyPad = (()=> {
       // encodingMode Protocol.EncodingMode (must be 24-bit)
       // imageType    false=not pushed; true=pushed
       // imageNumber  1..3
@@ -928,7 +928,7 @@ WacomGSS.STUConstructor = (function() {
       return RomStartImageData_KeyPad;
     })();
 
-    Protocol.prototype.RomStartImageData_Signature = (function () {
+    Protocol.prototype.RomStartImageData_Signature = (()=> {
       // encodingMode Protocol.EncodingMode (must be 24-bit)
       // imageType    false=not pushed; true=pushed
       // imageNumber  1..3
@@ -947,7 +947,7 @@ WacomGSS.STUConstructor = (function() {
       return RomStartImageData_Signature;
     })();
 
-    Protocol.prototype.RomStartImageData_MessageBox = (function () {
+    Protocol.prototype.RomStartImageData_MessageBox = (()=> {
       // encodingMode Protocol.EncodingMode (must be 24-bit)
       // imageType    not used
       // imageNumber  1..6
@@ -989,7 +989,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Protocol.prototype.getRomImageHash = function () {
+    Protocol.prototype.getRomImageHash = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -1013,7 +1013,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Protocol.prototype.getCurrentImageArea = function () {
+    Protocol.prototype.getCurrentImageArea = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -1037,7 +1037,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Protocol.prototype.getEserial = function () {
+    Protocol.prototype.getEserial = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -1046,7 +1046,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Protocol.prototype.setClearScreen = function () {
+    Protocol.prototype.setClearScreen = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope, 
@@ -1081,7 +1081,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
  
-    Protocol.prototype.getStatus = function () {
+    Protocol.prototype.getStatus = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope, 
@@ -1740,7 +1740,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
    
-    ReportHandler.prototype.stopReporting = function () {
+    ReportHandler.prototype.stopReporting = ()=> {
       if(null === streamId) {
         throw "Error: trying to stop reporting before starting";
       }
@@ -2808,7 +2808,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Tablet.prototype.getRenderingMode = function () {
+    Tablet.prototype.getRenderingMode = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -2828,7 +2828,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Tablet.prototype.getOperationMode = function () {
+    Tablet.prototype.getOperationMode = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -2861,7 +2861,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Tablet.prototype.getRomImageHash = function () {
+    Tablet.prototype.getRomImageHash = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -2885,7 +2885,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Tablet.prototype.getCurrentImageArea = function () {
+    Tablet.prototype.getCurrentImageArea = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -2909,7 +2909,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    Tablet.prototype.getEserial = function () {
+    Tablet.prototype.getEserial = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -2931,7 +2931,7 @@ WacomGSS.STUConstructor = (function() {
     function SerialInterface() {
     }
     
-    SerialInterface.prototype.Constructor = function () {
+    SerialInterface.prototype.Constructor = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope, 
@@ -3061,7 +3061,7 @@ WacomGSS.STUConstructor = (function() {
     return SerialInterface;
   })();
   
-  STU.prototype.TlsInterface = (function () {
+  STU.prototype.TlsInterface = (()=> {
 
     var scope = "WacomGSS.STU.TlsInterface";
     var id = "";
@@ -3069,7 +3069,7 @@ WacomGSS.STUConstructor = (function() {
     function TlsInterface() {
     }
 
-    TlsInterface.prototype.Constructor = function () {
+    TlsInterface.prototype.Constructor = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -3100,11 +3100,11 @@ WacomGSS.STUConstructor = (function() {
           });
     }
 
-    TlsInterface.prototype.toJSON = function () {
+    TlsInterface.prototype.toJSON = ()=> {
       return { "id": id, "scope": scope };
     }
 
-    TlsInterface.prototype.disconnect = function () {
+    TlsInterface.prototype.disconnect = ()=> {
       return WacomGSS.STU.send
              ({
                "scope": scope,
@@ -3113,7 +3113,7 @@ WacomGSS.STUConstructor = (function() {
              });
     }
 
-    TlsInterface.prototype.isConnected = function () {
+    TlsInterface.prototype.isConnected = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,
@@ -3143,7 +3143,7 @@ WacomGSS.STUConstructor = (function() {
           });
     }
 
-    TlsInterface.prototype.supportsWrite = function () {
+    TlsInterface.prototype.supportsWrite = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,
@@ -3162,7 +3162,7 @@ WacomGSS.STUConstructor = (function() {
           });
     }
 
-    TlsInterface.prototype.getReportCountLengths = function () {
+    TlsInterface.prototype.getReportCountLengths = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,
@@ -3171,7 +3171,7 @@ WacomGSS.STUConstructor = (function() {
           });
     }
 
-    TlsInterface.prototype.getProductId = function () {
+    TlsInterface.prototype.getProductId = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,
@@ -3181,7 +3181,7 @@ WacomGSS.STUConstructor = (function() {
     }
 
     /*
-    TlsInterface.prototype.getPeerCertificate = function () {
+    TlsInterface.prototype.getPeerCertificate = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,
@@ -3190,7 +3190,7 @@ WacomGSS.STUConstructor = (function() {
           });
     }
 
-    TlsInterface.prototype.isConnectedOOB = function () {
+    TlsInterface.prototype.isConnectedOOB = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,
@@ -3209,7 +3209,7 @@ WacomGSS.STUConstructor = (function() {
           });
     }
 
-    TlsInterface.prototype.getOOB = function () {
+    TlsInterface.prototype.getOOB = ()=> {
       return WacomGSS.STU.send
           ({
             "scope": scope,

@@ -32,7 +32,7 @@ function delRow(id) {
     agreementPurchase.size > 0 ? enableSubmit("#buttonAddAgreement") : disableSubmit("#buttonAddAgreement");
 }
 
-$("#buttonAddProduct").click(function () {
+$("#buttonAddProduct").click(()=> {
     event.preventDefault();
 
     video.pause();
@@ -92,7 +92,7 @@ function sendProducts(value, key, map) {
     postProducts += `"${key}":"${value}",`;
 }
 
-$("#buttonAddAgreement").click(function () {
+$("#buttonAddAgreement").click(()=> {
     event.preventDefault();
     if ($("#IDCL").val() == null) {
         document.querySelector('#message').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!</strong> Existe un problema, porfavor revise si selecciono un cliente e intentelo de nuevo.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -151,7 +151,7 @@ $("#buttonAddAgreement").click(function () {
 
 });
 
-$("#addProductForm *").on("change keydown keyup", function () {
+$("#addProductForm *").on("change keydown keyup", ()=> {
     if (checkInput("#make") &&
         checkInput("#model") &&
         checkInput("#sn") &&
@@ -204,7 +204,7 @@ let setDeviceList = () => {
 
 
 
-(function () {
+(()=> {
     if (!isUserMediaSupport()) {
         alert("Su navegador no acepta la captura de imagenes.");
         $("#state").text("Parece que tu navegador no soporta esta característica. Intenta actualizarlo.");

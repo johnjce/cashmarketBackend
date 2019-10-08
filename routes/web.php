@@ -11,37 +11,38 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+    //basicamente para controlar los perfiles que pueden acceder desde el controller
+//Auth::user()->authorizeRoles(['admin']);
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/customerAdd', 'CustomerController@index')->name('CustomerForm');
+    Route::post('/customerAdd', 'CustomerController@save')->name('CustomerAdd');
+    Route::get('/customers', 'CustomerController@seeCustomers')->name('CustomerList');
+    Route::post('/customerSearch', 'CustomerController@customerSearch')->name('CustomerSearch');
 
-Route::get('/customerAdd', 'CustomerController@index')->name('CustomerForm');
-Route::post('/customerAdd', 'CustomerController@save')->name('CustomerAdd');
-Route::get('/customers', 'CustomerController@seeCustomers')->name('CustomerList');
-Route::post('/customerSearch', 'CustomerController@customerSearch')->name('CustomerSearch');
+    Route::get('/newPurchase', 'PurchaseController@newPurchase')->name('Purchase');
+    Route::post('/savePurchase', 'PurchaseController@purchaseAdd')->name('SavePurchase');
+    Route::post('/purchaseAgreementData', 'PurchaseController@purchaseAgreementData')->name('purchaseAgreementData');
+    Route::get('/PurchaseList', 'PurchaseController@purchaseList')->name('PurchaseList');
 
-Route::get('/newPurchase', 'PurchaseController@newPurchase')->name('Purchase');
-Route::post('/savePurchase', 'PurchaseController@purchaseAdd')->name('SavePurchase');
-Route::post('/purchaseAgreementData', 'PurchaseController@purchaseAgreementData')->name('purchaseAgreementData');
-Route::get('/PurchaseList', 'PurchaseController@purchaseList')->name('PurchaseList');
+    
+    Route::get('/newDownPayment', 'DownPaymentController@newDownPayment')->name('DownPayment');
+    Route::post('/saveDownPayment', 'DownPaymentController@downPaymentAdd')->name('SaveDownPayment');
+    Route::get('/DownPaymentList', 'DownPaymentController@downPaymentList')->name('DownPaymentList');
 
-Route::get('/newDownPayment', 'DownPaymentController@newDownPayment')->name('DownPayment');
-Route::post('/saveDownPayment', 'DownPaymentController@downPaymentAdd')->name('SaveDownPayment');
-Route::get('/DownPaymentList', 'DownPaymentController@downPaymentList')->name('DownPaymentList');
+    Route::post('/updateSignature', 'HomeController@updateSignature')->name('updateSignature');
 
-Route::post('/updateSignature', 'HomeController@updateSignature')->name('updateSignature');
+    Route::get('/newPawn', 'PawnController@newPawn')->name('Pawn');
+    Route::post('/savePawn', 'PawnController@pawnAdd')->name('SavePawn');
+    Route::get('/PawnList', 'PawnController@pawnList')->name('PawnList');
 
-Route::get('/newPawn', 'PawnController@newPawn')->name('Pawn');
-Route::post('/savePawn', 'PawnController@pawnAdd')->name('SavePawn');
-Route::get('/PawnList', 'PawnController@pawnList')->name('PawnList');
-
+});

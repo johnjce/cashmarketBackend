@@ -1,4 +1,4 @@
-$("#inputSearch").on("change paste keyup", function () {
+$("#inputSearch").on("change paste keyup", ()=> {
     var value = $("#inputSearch").val();
     var posting = $.post("./customerSearch", { "q": value });
     posting.done(function (data) {

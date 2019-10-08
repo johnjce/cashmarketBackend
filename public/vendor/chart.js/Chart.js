@@ -1241,49 +1241,49 @@ var Color = function (obj) {
 };
 
 Color.prototype = {
-	isValid: function () {
+	isValid: ()=> {
 		return this.valid;
 	},
-	rgb: function () {
+	rgb: ()=> {
 		return this.setSpace('rgb', arguments);
 	},
-	hsl: function () {
+	hsl: ()=> {
 		return this.setSpace('hsl', arguments);
 	},
-	hsv: function () {
+	hsv: ()=> {
 		return this.setSpace('hsv', arguments);
 	},
-	hwb: function () {
+	hwb: ()=> {
 		return this.setSpace('hwb', arguments);
 	},
-	cmyk: function () {
+	cmyk: ()=> {
 		return this.setSpace('cmyk', arguments);
 	},
 
-	rgbArray: function () {
+	rgbArray: ()=> {
 		return this.values.rgb;
 	},
-	hslArray: function () {
+	hslArray: ()=> {
 		return this.values.hsl;
 	},
-	hsvArray: function () {
+	hsvArray: ()=> {
 		return this.values.hsv;
 	},
-	hwbArray: function () {
+	hwbArray: ()=> {
 		var values = this.values;
 		if (values.alpha !== 1) {
 			return values.hwb.concat([values.alpha]);
 		}
 		return values.hwb;
 	},
-	cmykArray: function () {
+	cmykArray: ()=> {
 		return this.values.cmyk;
 	},
-	rgbaArray: function () {
+	rgbaArray: ()=> {
 		var values = this.values;
 		return values.rgb.concat([values.alpha]);
 	},
-	hslaArray: function () {
+	hslaArray: ()=> {
 		var values = this.values;
 		return values.hsl.concat([values.alpha]);
 	},
@@ -1342,37 +1342,37 @@ Color.prototype = {
 		return this.setChannel('cmyk', 3, val);
 	},
 
-	hexString: function () {
+	hexString: ()=> {
 		return colorString.hexString(this.values.rgb);
 	},
-	rgbString: function () {
+	rgbString: ()=> {
 		return colorString.rgbString(this.values.rgb, this.values.alpha);
 	},
-	rgbaString: function () {
+	rgbaString: ()=> {
 		return colorString.rgbaString(this.values.rgb, this.values.alpha);
 	},
-	percentString: function () {
+	percentString: ()=> {
 		return colorString.percentString(this.values.rgb, this.values.alpha);
 	},
-	hslString: function () {
+	hslString: ()=> {
 		return colorString.hslString(this.values.hsl, this.values.alpha);
 	},
-	hslaString: function () {
+	hslaString: ()=> {
 		return colorString.hslaString(this.values.hsl, this.values.alpha);
 	},
-	hwbString: function () {
+	hwbString: ()=> {
 		return colorString.hwbString(this.values.hwb, this.values.alpha);
 	},
-	keyword: function () {
+	keyword: ()=> {
 		return colorString.keyword(this.values.rgb, this.values.alpha);
 	},
 
-	rgbNumber: function () {
+	rgbNumber: ()=> {
 		var rgb = this.values.rgb;
 		return (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 	},
 
-	luminosity: function () {
+	luminosity: ()=> {
 		// http://www.w3.org/TR/WCAG20/#relativeluminancedef
 		var rgb = this.values.rgb;
 		var lum = [];
@@ -1402,18 +1402,18 @@ Color.prototype = {
 		return (contrastRatio >= 4.5) ? 'AA' : '';
 	},
 
-	dark: function () {
+	dark: ()=> {
 		// YIQ equation from http://24ways.org/2010/calculating-color-contrast
 		var rgb = this.values.rgb;
 		var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
 		return yiq < 128;
 	},
 
-	light: function () {
+	light: ()=> {
 		return !this.dark();
 	},
 
-	negate: function () {
+	negate: ()=> {
 		var rgb = [];
 		for (var i = 0; i < 3; i++) {
 			rgb[i] = 255 - this.values.rgb[i];
@@ -1464,7 +1464,7 @@ Color.prototype = {
 		return this;
 	},
 
-	greyscale: function () {
+	greyscale: ()=> {
 		var rgb = this.values.rgb;
 		// http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
 		var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
@@ -1516,11 +1516,11 @@ Color.prototype = {
 			.alpha(color1.alpha() * p + color2.alpha() * (1 - p));
 	},
 
-	toJSON: function () {
+	toJSON: ()=> {
 		return this.rgb();
 	},
 
-	clone: function () {
+	clone: ()=> {
 		// NOTE(SB): using node-clone creates a dependency to Buffer when using browserify,
 		// making the final build way to big to embed in Chart.js. So let's do it manually,
 		// assuming that values to clone are 1 dimension arrays containing only numbers,

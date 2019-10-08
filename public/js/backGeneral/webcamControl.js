@@ -34,7 +34,7 @@ let setDeviceList = () => {
         });
 }
 
-(function () {
+(()=> {
     if (!isUserMediaSupport()) {
         $("#state").text("Parece que tu navegador no soporta esta característica. Intenta actualizarlo.");
         return;

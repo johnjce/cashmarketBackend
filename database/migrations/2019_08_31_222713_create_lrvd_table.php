@@ -23,8 +23,8 @@ class CreateLrvdTable extends Migration
             $table->string('comment');
             $table->string('typeDocument'); 
             $table->string('documentId'); 
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

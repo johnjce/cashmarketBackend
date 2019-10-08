@@ -8,7 +8,7 @@
 typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 typeof define === 'function' && define.amd ? define(factory) :
 (global.Chart = factory());
-}(this, (function () { 'use strict';
+}(this, (()=> { 'use strict';
 
 /* MIT license */
 
@@ -1239,49 +1239,49 @@ var Color = function (obj) {
 };
 
 Color.prototype = {
-	isValid: function () {
+	isValid: ()=> {
 		return this.valid;
 	},
-	rgb: function () {
+	rgb: ()=> {
 		return this.setSpace('rgb', arguments);
 	},
-	hsl: function () {
+	hsl: ()=> {
 		return this.setSpace('hsl', arguments);
 	},
-	hsv: function () {
+	hsv: ()=> {
 		return this.setSpace('hsv', arguments);
 	},
-	hwb: function () {
+	hwb: ()=> {
 		return this.setSpace('hwb', arguments);
 	},
-	cmyk: function () {
+	cmyk: ()=> {
 		return this.setSpace('cmyk', arguments);
 	},
 
-	rgbArray: function () {
+	rgbArray: ()=> {
 		return this.values.rgb;
 	},
-	hslArray: function () {
+	hslArray: ()=> {
 		return this.values.hsl;
 	},
-	hsvArray: function () {
+	hsvArray: ()=> {
 		return this.values.hsv;
 	},
-	hwbArray: function () {
+	hwbArray: ()=> {
 		var values = this.values;
 		if (values.alpha !== 1) {
 			return values.hwb.concat([values.alpha]);
 		}
 		return values.hwb;
 	},
-	cmykArray: function () {
+	cmykArray: ()=> {
 		return this.values.cmyk;
 	},
-	rgbaArray: function () {
+	rgbaArray: ()=> {
 		var values = this.values;
 		return values.rgb.concat([values.alpha]);
 	},
-	hslaArray: function () {
+	hslaArray: ()=> {
 		var values = this.values;
 		return values.hsl.concat([values.alpha]);
 	},
@@ -1340,37 +1340,37 @@ Color.prototype = {
 		return this.setChannel('cmyk', 3, val);
 	},
 
-	hexString: function () {
+	hexString: ()=> {
 		return colorString.hexString(this.values.rgb);
 	},
-	rgbString: function () {
+	rgbString: ()=> {
 		return colorString.rgbString(this.values.rgb, this.values.alpha);
 	},
-	rgbaString: function () {
+	rgbaString: ()=> {
 		return colorString.rgbaString(this.values.rgb, this.values.alpha);
 	},
-	percentString: function () {
+	percentString: ()=> {
 		return colorString.percentString(this.values.rgb, this.values.alpha);
 	},
-	hslString: function () {
+	hslString: ()=> {
 		return colorString.hslString(this.values.hsl, this.values.alpha);
 	},
-	hslaString: function () {
+	hslaString: ()=> {
 		return colorString.hslaString(this.values.hsl, this.values.alpha);
 	},
-	hwbString: function () {
+	hwbString: ()=> {
 		return colorString.hwbString(this.values.hwb, this.values.alpha);
 	},
-	keyword: function () {
+	keyword: ()=> {
 		return colorString.keyword(this.values.rgb, this.values.alpha);
 	},
 
-	rgbNumber: function () {
+	rgbNumber: ()=> {
 		var rgb = this.values.rgb;
 		return (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 	},
 
-	luminosity: function () {
+	luminosity: ()=> {
 		// http://www.w3.org/TR/WCAG20/#relativeluminancedef
 		var rgb = this.values.rgb;
 		var lum = [];
@@ -1400,18 +1400,18 @@ Color.prototype = {
 		return (contrastRatio >= 4.5) ? 'AA' : '';
 	},
 
-	dark: function () {
+	dark: ()=> {
 		// YIQ equation from http://24ways.org/2010/calculating-color-contrast
 		var rgb = this.values.rgb;
 		var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
 		return yiq < 128;
 	},
 
-	light: function () {
+	light: ()=> {
 		return !this.dark();
 	},
 
-	negate: function () {
+	negate: ()=> {
 		var rgb = [];
 		for (var i = 0; i < 3; i++) {
 			rgb[i] = 255 - this.values.rgb[i];
@@ -1462,7 +1462,7 @@ Color.prototype = {
 		return this;
 	},
 
-	greyscale: function () {
+	greyscale: ()=> {
 		var rgb = this.values.rgb;
 		// http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
 		var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
@@ -1514,11 +1514,11 @@ Color.prototype = {
 			.alpha(color1.alpha() * p + color2.alpha() * (1 - p));
 	},
 
-	toJSON: function () {
+	toJSON: ()=> {
 		return this.rgb();
 	},
 
-	clone: function () {
+	clone: ()=> {
 		// NOTE(SB): using node-clone creates a dependency to Buffer when using browserify,
 		// making the final build way to big to embed in Chart.js. So let's do it manually,
 		// assuming that values to clone are 1 dimension arrays containing only numbers,
@@ -13328,7 +13328,7 @@ var scales = {
 var moment = createCommonjsModule(function (module, exports) {
 (function (global, factory) {
     module.exports = factory();
-}(commonjsGlobal, (function () {
+}(commonjsGlobal, (()=> {
     var hookCallback;
 
     function hooks () {
@@ -13620,7 +13620,7 @@ var moment = createCommonjsModule(function (module, exports) {
     function deprecate(msg, fn) {
         var firstTime = true;
 
-        return extend(function () {
+        return extend(()=> {
             if (hooks.deprecationHandler != null) {
                 hooks.deprecationHandler(null, msg);
             }
@@ -13877,11 +13877,11 @@ var moment = createCommonjsModule(function (module, exports) {
     // token:    'M'
     // padded:   ['MM', 2]
     // ordinal:  'Mo'
-    // callback: function () { this.month() + 1 }
+    // callback: ()=> { this.month() + 1 }
     function addFormatToken (token, padded, ordinal, callback) {
         var func = callback;
         if (typeof callback === 'string') {
-            func = function () {
+            func = ()=> {
                 return this[callback]();
             };
         }
@@ -13889,12 +13889,12 @@ var moment = createCommonjsModule(function (module, exports) {
             formatTokenFunctions[token] = func;
         }
         if (padded) {
-            formatTokenFunctions[padded[0]] = function () {
+            formatTokenFunctions[padded[0]] = ()=> {
                 return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
             };
         }
         if (ordinal) {
-            formatTokenFunctions[ordinal] = function () {
+            formatTokenFunctions[ordinal] = ()=> {
                 return this.localeData().ordinal(func.apply(this, arguments), token);
             };
         }
@@ -14049,12 +14049,12 @@ var moment = createCommonjsModule(function (module, exports) {
 
     // FORMATTING
 
-    addFormatToken('Y', 0, 0, function () {
+    addFormatToken('Y', 0, 0, ()=> {
         var y = this.year();
         return y <= 9999 ? '' + y : '+' + y;
     });
 
-    addFormatToken(0, ['YY', 2], 0, function () {
+    addFormatToken(0, ['YY', 2], 0, ()=> {
         return this.year() % 100;
     });
 
@@ -14200,7 +14200,7 @@ var moment = createCommonjsModule(function (module, exports) {
 
     // FORMATTING
 
-    addFormatToken('M', ['MM', 2], 'Mo', function () {
+    addFormatToken('M', ['MM', 2], 'Mo', ()=> {
         return this.month() + 1;
     });
 
@@ -14989,26 +14989,26 @@ var moment = createCommonjsModule(function (module, exports) {
     addFormatToken('h', ['hh', 2], 0, hFormat);
     addFormatToken('k', ['kk', 2], 0, kFormat);
 
-    addFormatToken('hmm', 0, 0, function () {
+    addFormatToken('hmm', 0, 0, ()=> {
         return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
     });
 
-    addFormatToken('hmmss', 0, 0, function () {
+    addFormatToken('hmmss', 0, 0, ()=> {
         return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) +
             zeroFill(this.seconds(), 2);
     });
 
-    addFormatToken('Hmm', 0, 0, function () {
+    addFormatToken('Hmm', 0, 0, ()=> {
         return '' + this.hours() + zeroFill(this.minutes(), 2);
     });
 
-    addFormatToken('Hmmss', 0, 0, function () {
+    addFormatToken('Hmmss', 0, 0, ()=> {
         return '' + this.hours() + zeroFill(this.minutes(), 2) +
             zeroFill(this.seconds(), 2);
     });
 
     function meridiem (token, lowercase) {
-        addFormatToken(token, 0, 0, function () {
+        addFormatToken(token, 0, 0, ()=> {
             return this.localeData().meridiem(this.hours(), this.minutes(), lowercase);
         });
     }
@@ -15719,10 +15719,10 @@ var moment = createCommonjsModule(function (module, exports) {
     );
 
     // constant that refers to the ISO standard
-    hooks.ISO_8601 = function () {};
+    hooks.ISO_8601 = ()=> {};
 
     // constant that refers to the RFC 2822 form
-    hooks.RFC_2822 = function () {};
+    hooks.RFC_2822 = ()=> {};
 
     // date from string and format string
     function configFromStringAndFormat(config) {
@@ -15977,7 +15977,7 @@ var moment = createCommonjsModule(function (module, exports) {
 
     var prototypeMin = deprecate(
         'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
-        function () {
+        ()=> {
             var other = createLocal.apply(null, arguments);
             if (this.isValid() && other.isValid()) {
                 return other < this ? this : other;
@@ -15989,7 +15989,7 @@ var moment = createCommonjsModule(function (module, exports) {
 
     var prototypeMax = deprecate(
         'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
-        function () {
+        ()=> {
             var other = createLocal.apply(null, arguments);
             if (this.isValid() && other.isValid()) {
                 return other > this ? this : other;
@@ -16034,7 +16034,7 @@ var moment = createCommonjsModule(function (module, exports) {
         return pickBy('isAfter', args);
     }
 
-    var now = function () {
+    var now = ()=> {
         return Date.now ? Date.now() : +(new Date());
     };
 
@@ -16122,7 +16122,7 @@ var moment = createCommonjsModule(function (module, exports) {
     // FORMATTING
 
     function offset (token, separator) {
-        addFormatToken(token, 0, 0, function () {
+        addFormatToken(token, 0, 0, ()=> {
             var offset = this.utcOffset();
             var sign = '+';
             if (offset < 0) {
@@ -16193,7 +16193,7 @@ var moment = createCommonjsModule(function (module, exports) {
 
     // This function will be called whenever a moment is mutated.
     // It is intended to keep the offset in sync with the timezone.
-    hooks.updateOffset = function () {};
+    hooks.updateOffset = ()=> {};
 
     // MOMENTS
 
@@ -16944,11 +16944,11 @@ var moment = createCommonjsModule(function (module, exports) {
 
     // FORMATTING
 
-    addFormatToken(0, ['gg', 2], 0, function () {
+    addFormatToken(0, ['gg', 2], 0, ()=> {
         return this.weekYear() % 100;
     });
 
-    addFormatToken(0, ['GG', 2], 0, function () {
+    addFormatToken(0, ['GG', 2], 0, ()=> {
         return this.isoWeekYear() % 100;
     });
 
@@ -17169,31 +17169,31 @@ var moment = createCommonjsModule(function (module, exports) {
 
     // FORMATTING
 
-    addFormatToken('S', 0, 0, function () {
+    addFormatToken('S', 0, 0, ()=> {
         return ~~(this.millisecond() / 100);
     });
 
-    addFormatToken(0, ['SS', 2], 0, function () {
+    addFormatToken(0, ['SS', 2], 0, ()=> {
         return ~~(this.millisecond() / 10);
     });
 
     addFormatToken(0, ['SSS', 3], 0, 'millisecond');
-    addFormatToken(0, ['SSSS', 4], 0, function () {
+    addFormatToken(0, ['SSSS', 4], 0, ()=> {
         return this.millisecond() * 10;
     });
-    addFormatToken(0, ['SSSSS', 5], 0, function () {
+    addFormatToken(0, ['SSSSS', 5], 0, ()=> {
         return this.millisecond() * 100;
     });
-    addFormatToken(0, ['SSSSSS', 6], 0, function () {
+    addFormatToken(0, ['SSSSSS', 6], 0, ()=> {
         return this.millisecond() * 1000;
     });
-    addFormatToken(0, ['SSSSSSS', 7], 0, function () {
+    addFormatToken(0, ['SSSSSSS', 7], 0, ()=> {
         return this.millisecond() * 10000;
     });
-    addFormatToken(0, ['SSSSSSSS', 8], 0, function () {
+    addFormatToken(0, ['SSSSSSSS', 8], 0, ()=> {
         return this.millisecond() * 100000;
     });
-    addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
+    addFormatToken(0, ['SSSSSSSSS', 9], 0, ()=> {
         return this.millisecond() * 1000000;
     });
 
@@ -17626,7 +17626,7 @@ var moment = createCommonjsModule(function (module, exports) {
     }
 
     function makeAs (alias) {
-        return function () {
+        return ()=> {
             return this.as(alias);
         };
     }
@@ -17651,7 +17651,7 @@ var moment = createCommonjsModule(function (module, exports) {
     }
 
     function makeGetter(name) {
-        return function () {
+        return ()=> {
             return this.isValid() ? this._data[name] : NaN;
         };
     }

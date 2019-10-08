@@ -279,7 +279,7 @@
 		 *        "bPaginate": false
 		 *      } );
 		 *
-		 *      $(window).on('resize', function () {
+		 *      $(window).on('resize', ()=> {
 		 *        oTable.fnAdjustColumnSizing();
 		 *      } );
 		 *    } );
@@ -337,7 +337,7 @@
 		 *      var oTable;
 		 *
 		 *      // 'open' an information row when a row is clicked on
-		 *      $('#example tbody tr').click( function () {
+		 *      $('#example tbody tr').click( ()=> {
 		 *        if ( oTable.fnIsOpen(this) ) {
 		 *          oTable.fnClose( this );
 		 *        } else {
@@ -489,7 +489,7 @@
 		 *    $(document).ready(function() {
 		 *      oTable = $('#example').dataTable();
 		 *
-		 *      oTable.$('tr').click( function () {
+		 *      oTable.$('tr').click( ()=> {
 		 *        var data = oTable.fnGetData( this );
 		 *        // ... do something with the array / object of data for the row
 		 *      } );
@@ -500,7 +500,7 @@
 		 *    $(document).ready(function() {
 		 *      oTable = $('#example').dataTable();
 		 *
-		 *      oTable.$('td').click( function () {
+		 *      oTable.$('td').click( ()=> {
 		 *        var sData = oTable.fnGetData( this );
 		 *        alert( 'The cell clicked on had the value of '+sData );
 		 *      } );
@@ -562,7 +562,7 @@
 		 *
 		 *  @example
 		 *    $(document).ready(function() {
-		 *      $('#example tbody td').click( function () {
+		 *      $('#example tbody td').click( ()=> {
 		 *        // Get the position of the current data from the node
 		 *        var aPos = oTable.fnGetPosition( this );
 		 *
@@ -611,7 +611,7 @@
 		 *      var oTable;
 		 *
 		 *      // 'open' an information row when a row is clicked on
-		 *      $('#example tbody tr').click( function () {
+		 *      $('#example tbody tr').click( ()=> {
 		 *        if ( oTable.fnIsOpen(this) ) {
 		 *          oTable.fnClose( this );
 		 *        } else {
@@ -647,7 +647,7 @@
 		 *      var oTable;
 		 *
 		 *      // 'open' an information row when a row is clicked on
-		 *      $('#example tbody tr').click( function () {
+		 *      $('#example tbody tr').click( ()=> {
 		 *        if ( oTable.fnIsOpen(this) ) {
 		 *          oTable.fnClose( this );
 		 *        } else {
@@ -1090,7 +1090,7 @@
 						$.extend( true, oLanguage, json );
 						_fnInitialise( oSettings );
 					},
-					error: function () {
+					error: ()=> {
 						// Error occurred loading language file, continue on as best we can
 						_fnInitialise( oSettings );
 					}
@@ -1187,7 +1187,7 @@
 			}
 			
 			var features = oSettings.oFeatures;
-			var loadedInit = function () {
+			var loadedInit = ()=> {
 				/*
 				 * Sorting
 				 * @todo For modularisation (1.11) this needs to do into a sort start up handler
@@ -1208,7 +1208,7 @@
 				_fnSortingClasses( oSettings );
 			
 				if ( features.bSort ) {
-					_fnCallbackReg( oSettings, 'aoDrawCallback', function () {
+					_fnCallbackReg( oSettings, 'aoDrawCallback', ()=> {
 						if ( oSettings.bSorted ) {
 							var aSort = _fnSortFlatten( oSettings );
 							var sortedColumns = {};
@@ -1223,7 +1223,7 @@
 					} );
 				}
 			
-				_fnCallbackReg( oSettings, 'aoDrawCallback', function () {
+				_fnCallbackReg( oSettings, 'aoDrawCallback', ()=> {
 					if ( oSettings.bSorted || _fnDataSource( oSettings ) === 'ssp' || features.bDeferRender ) {
 						_fnSortingClasses( oSettings );
 					}
@@ -1236,7 +1236,7 @@
 				 */
 			
 				// Work around for Webkit bug 83867 - store the caption-side before removing from doc
-				var captions = $this.children('caption').each( function () {
+				var captions = $this.children('caption').each( ()=> {
 					this._captionSide = $(this).css('caption-side');
 				} );
 			
@@ -1610,7 +1610,7 @@
 				last,
 				timer;
 	
-			return function () {
+			return ()=> {
 				var
 					that = this,
 					now  = +new Date(),
@@ -1619,7 +1619,7 @@
 				if ( last && now < last + frequency ) {
 					clearTimeout( timer );
 	
-					timer = setTimeout( function () {
+					timer = setTimeout( ()=> {
 						last = undefined;
 						fn.apply( that, args );
 					}, frequency );
@@ -2713,7 +2713,7 @@
 		else if ( mSource === null )
 		{
 			/* Nothing to do when the data source is null */
-			return function () {};
+			return ()=> {};
 		}
 		else if ( typeof mSource === 'function' )
 		{
@@ -5715,8 +5715,8 @@
 		}
 	
 		if ( (tableWidthAttr || scrollX) && ! oSettings._reszEvt ) {
-			var bindResize = function () {
-				$(window).on('resize.DT-'+oSettings.sInstance, _fnThrottle( function () {
+			var bindResize = ()=> {
+				$(window).on('resize.DT-'+oSettings.sInstance, _fnThrottle( ()=> {
 					_fnAdjustColumnSizing( oSettings );
 				} ) );
 			};
@@ -6585,7 +6585,7 @@
 						fn(e);
 					}
 				} )
-			.on( 'selectstart.DT', function () {
+			.on( 'selectstart.DT', ()=> {
 					/* Take the brutal approach to cancelling text selection */
 					return false;
 				} );
@@ -6730,7 +6730,7 @@
 	 *     [
 	 *       {
 	 *         name:      'data'                -- string   - Property name
-	 *         val:       function () {},       -- function - Api method (or undefined if just an object
+	 *         val:       ()=> {},       -- function - Api method (or undefined if just an object
 	 *         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method result
 	 *         propExt:   [ ... ]               -- array    - Array of Api object definitions to extend the property
 	 *       },
@@ -6741,7 +6741,7 @@
 	 *         propExt:   [
 	 *           {
 	 *             name:      'data'
-	 *             val:       function () {},
+	 *             val:       ()=> {},
 	 *             methodExt: [ ... ],
 	 *             propExt:   [ ... ]
 	 *           },
@@ -6926,7 +6926,7 @@
 	// Don't destroy the existing prototype, just extend it. Required for jQuery 2's
 	// isPlainObject.
 	$.extend( _Api.prototype, {
-		any: function ()
+		any: ()=>
 		{
 			return this.count() !== 0;
 		},
@@ -6938,7 +6938,7 @@
 		context: [], // array of table settings objects
 	
 	
-		count: function ()
+		count: ()=>
 		{
 			return this.flatten().length;
 		},
@@ -6984,7 +6984,7 @@
 		},
 	
 	
-		flatten: function ()
+		flatten: ()=>
 		{
 			var a = [];
 			return new _Api( this.context, a.concat.apply( a, this.toArray() ) );
@@ -7140,7 +7140,7 @@
 		shift:   __arrayProto.shift,
 	
 	
-		slice: function () {
+		slice: ()=> {
 			return new _Api( this.context, this );
 		},
 	
@@ -7151,25 +7151,25 @@
 		splice:  __arrayProto.splice,
 	
 	
-		toArray: function ()
+		toArray: ()=>
 		{
 			return __arrayProto.slice.call( this );
 		},
 	
 	
-		to$: function ()
+		to$: ()=>
 		{
 			return $( this );
 		},
 	
 	
-		toJQuery: function ()
+		toJQuery: ()=>
 		{
 			return $( this );
 		},
 	
 	
-		unique: function ()
+		unique: ()=>
 		{
 			return new _Api( this.context, _unique(this) );
 		},
@@ -7191,7 +7191,7 @@
 			j, jen,
 			struct, inner,
 			methodScoping = function ( scope, fn, struc ) {
-				return function () {
+				return ()=> {
 					var ret = fn.apply( scope, arguments );
 	
 					// Method extension
@@ -7231,7 +7231,7 @@
 	//     [
 	//       {
 	//         name:      'data'                -- string   - Property name
-	//         val:       function () {},       -- function - Api method (or undefined if just an object
+	//         val:       ()=> {},       -- function - Api method (or undefined if just an object
 	//         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method result
 	//         propExt:   [ ... ]               -- array    - Array of Api object definitions to extend the property
 	//       },
@@ -7242,7 +7242,7 @@
 	//         propExt:   [
 	//           {
 	//             name:      'data'
-	//             val:       function () {},
+	//             val:       ()=> {},
 	//             methodExt: [ ... ],
 	//             propExt:   [ ... ]
 	//           },
@@ -7307,7 +7307,7 @@
 	_Api.registerPlural = _api_registerPlural = function ( pluralName, singularName, val ) {
 		_Api.register( pluralName, val );
 	
-		_Api.register( singularName, function () {
+		_Api.register( singularName, ()=> {
 			var ret = val.apply( this, arguments );
 	
 			if ( ret === this ) {
@@ -7393,35 +7393,35 @@
 	} );
 	
 	
-	_api_registerPlural( 'tables().nodes()', 'table().node()' , function () {
+	_api_registerPlural( 'tables().nodes()', 'table().node()' , ()=> {
 		return this.iterator( 'table', function ( ctx ) {
 			return ctx.nTable;
 		}, 1 );
 	} );
 	
 	
-	_api_registerPlural( 'tables().body()', 'table().body()' , function () {
+	_api_registerPlural( 'tables().body()', 'table().body()' , ()=> {
 		return this.iterator( 'table', function ( ctx ) {
 			return ctx.nTBody;
 		}, 1 );
 	} );
 	
 	
-	_api_registerPlural( 'tables().header()', 'table().header()' , function () {
+	_api_registerPlural( 'tables().header()', 'table().header()' , ()=> {
 		return this.iterator( 'table', function ( ctx ) {
 			return ctx.nTHead;
 		}, 1 );
 	} );
 	
 	
-	_api_registerPlural( 'tables().footer()', 'table().footer()' , function () {
+	_api_registerPlural( 'tables().footer()', 'table().footer()' , ()=> {
 		return this.iterator( 'table', function ( ctx ) {
 			return ctx.nTFoot;
 		}, 1 );
 	} );
 	
 	
-	_api_registerPlural( 'tables().containers()', 'table().container()' , function () {
+	_api_registerPlural( 'tables().containers()', 'table().container()' , ()=> {
 		return this.iterator( 'table', function ( ctx ) {
 			return ctx.nTableWrapper;
 		}, 1 );
@@ -7559,7 +7559,7 @@
 		if ( callback ) {
 			var api = new _Api( settings );
 	
-			api.one( 'draw', function () {
+			api.one( 'draw', ()=> {
 				callback( api.ajax.json() );
 			} );
 		}
@@ -7599,7 +7599,7 @@
 	 *
 	 * @return {object} JSON received from the server.
 	 */
-	_api_register( 'ajax.json()', function () {
+	_api_register( 'ajax.json()', ()=> {
 		var ctx = this.context;
 	
 		if ( ctx.length > 0 ) {
@@ -7613,7 +7613,7 @@
 	/**
 	 * Get the data submitted in the last Ajax request
 	 */
-	_api_register( 'ajax.params()', function () {
+	_api_register( 'ajax.params()', ()=> {
 		var ctx = this.context;
 	
 		if ( ctx.length > 0 ) {
@@ -7958,7 +7958,7 @@
 			// it also allows arrays, so this will cope with all three options
 			return $(nodes)
 				.filter( sel )
-				.map( function () {
+				.map( ()=> {
 					return this._DT_RowIndex;
 				} )
 				.toArray();
@@ -7991,13 +7991,13 @@
 		return inst;
 	} );
 	
-	_api_register( 'rows().nodes()', function () {
+	_api_register( 'rows().nodes()', ()=> {
 		return this.iterator( 'row', function ( settings, row ) {
 			return settings.aoData[ row ].nTr || undefined;
 		}, 1 );
 	} );
 	
-	_api_register( 'rows().data()', function () {
+	_api_register( 'rows().data()', ()=> {
 		return this.iterator( true, 'rows', function ( settings, rows ) {
 			return _pluck_order( settings.aoData, rows, '_aData' );
 		}, 1 );
@@ -8016,7 +8016,7 @@
 		} );
 	} );
 	
-	_api_registerPlural( 'rows().indexes()', 'row().index()', function () {
+	_api_registerPlural( 'rows().indexes()', 'row().index()', ()=> {
 		return this.iterator( 'row', function ( settings, row ) {
 			return row;
 		}, 1 );
@@ -8037,7 +8037,7 @@
 		return new _Api( context, a );
 	} );
 	
-	_api_registerPlural( 'rows().remove()', 'row().remove()', function () {
+	_api_registerPlural( 'rows().remove()', 'row().remove()', ()=> {
 		var that = this;
 	
 		this.iterator( 'row', function ( settings, row, thatIdx ) {
@@ -8161,7 +8161,7 @@
 	} );
 	
 	
-	_api_register( 'row().node()', function () {
+	_api_register( 'row().node()', ()=> {
 		var ctx = this.context;
 	
 		return ctx.length && this.length ?
@@ -8383,7 +8383,7 @@
 	_api_register( [
 		_child_obj+'.hide()',
 		_child_mth+'.hide()' // only when `child()` was called with parameters (without
-	], function () {         // it returns an object and this method is not executed)
+	], ()=> {         // it returns an object and this method is not executed)
 		__details_display( this, false );
 		return this;
 	} );
@@ -8392,13 +8392,13 @@
 	_api_register( [
 		_child_obj+'.remove()',
 		_child_mth+'.remove()' // only when `child()` was called with parameters (without
-	], function () {           // it returns an object and this method is not executed)
+	], ()=> {           // it returns an object and this method is not executed)
 		__details_remove( this );
 		return this;
 	} );
 	
 	
-	_api_register( _child_obj+'.isShown()', function () {
+	_api_register( _child_obj+'.isShown()', ()=> {
 		var ctx = this.context;
 	
 		if ( ctx.length && this.length ) {
@@ -8514,7 +8514,7 @@
 			// jQuery selector on the TH elements for the columns
 			var jqResult = $( nodes )
 				.filter( s )
-				.map( function () {
+				.map( ()=> {
 					return $.inArray( this, nodes ); // `nodes` is column index complete and in order
 				} )
 				.toArray();
@@ -8623,11 +8623,11 @@
 		}, 1 );
 	} );
 	
-	_api_registerPlural( 'columns().data()', 'column().data()', function () {
+	_api_registerPlural( 'columns().data()', 'column().data()', ()=> {
 		return this.iterator( 'column-rows', __columnData, 1 );
 	} );
 	
-	_api_registerPlural( 'columns().dataSrc()', 'column().dataSrc()', function () {
+	_api_registerPlural( 'columns().dataSrc()', 'column().dataSrc()', ()=> {
 		return this.iterator( 'column', function ( settings, column ) {
 			return settings.aoColumns[column].mData;
 		}, 1 );
@@ -8641,7 +8641,7 @@
 		}, 1 );
 	} );
 	
-	_api_registerPlural( 'columns().nodes()', 'column().nodes()', function () {
+	_api_registerPlural( 'columns().nodes()', 'column().nodes()', ()=> {
 		return this.iterator( 'column-rows', function ( settings, column, i, j, rows ) {
 			return _pluck_order( settings.aoData, rows, 'anCells', column ) ;
 		}, 1 );
@@ -8678,7 +8678,7 @@
 		}, 1 );
 	} );
 	
-	_api_register( 'columns.adjust()', function () {
+	_api_register( 'columns.adjust()', ()=> {
 		return this.iterator( 'table', function ( settings ) {
 			_fnAdjustColumnSizing( settings );
 		}, 1 );
@@ -8846,7 +8846,7 @@
 	} );
 	
 	
-	_api_registerPlural( 'cells().nodes()', 'cell().node()', function () {
+	_api_registerPlural( 'cells().nodes()', 'cell().node()', ()=> {
 		return this.iterator( 'cell', function ( settings, row, column ) {
 			var data = settings.aoData[ row ];
 	
@@ -8857,7 +8857,7 @@
 	} );
 	
 	
-	_api_register( 'cells().data()', function () {
+	_api_register( 'cells().data()', ()=> {
 		return this.iterator( 'cell', function ( settings, row, column ) {
 			return _fnGetCellData( settings, row, column );
 		}, 1 );
@@ -8880,7 +8880,7 @@
 	} );
 	
 	
-	_api_registerPlural( 'cells().indexes()', 'cell().index()', function () {
+	_api_registerPlural( 'cells().indexes()', 'cell().index()', ()=> {
 		return this.iterator( 'cell', function ( settings, row, column ) {
 			return {
 				row: row,
@@ -9093,14 +9093,14 @@
 	 * State API methods
 	 */
 	
-	_api_register( 'state()', function () {
+	_api_register( 'state()', ()=> {
 		return this.context.length ?
 			this.context[0].oSavedState :
 			null;
 	} );
 	
 	
-	_api_register( 'state.clear()', function () {
+	_api_register( 'state.clear()', ()=> {
 		return this.iterator( 'table', function ( settings ) {
 			// Save an empty object
 			settings.fnStateSaveCallback.call( settings.oInstance, settings, {} );
@@ -9108,14 +9108,14 @@
 	} );
 	
 	
-	_api_register( 'state.loaded()', function () {
+	_api_register( 'state.loaded()', ()=> {
 		return this.context.length ?
 			this.context[0].oLoadedState :
 			null;
 	} );
 	
 	
-	_api_register( 'state.save()', function () {
+	_api_register( 'state.save()', ()=> {
 		return this.iterator( 'table', function ( settings ) {
 			_fnSaveState( settings );
 		} );
@@ -9210,7 +9210,7 @@
 	 *  @dtopt API-Static
 	 *
 	 *  @example
-	 *    $.each( $.fn.dataTable.tables(true), function () {
+	 *    $.each( $.fn.dataTable.tables(true), ()=> {
 	 *      $(table).DataTable().columns.adjust();
 	 *    } );
 	 */
@@ -9286,25 +9286,25 @@
 	} );
 	
 	
-	_api_register( 'clear()', function () {
+	_api_register( 'clear()', ()=> {
 		return this.iterator( 'table', function ( settings ) {
 			_fnClearTable( settings );
 		} );
 	} );
 	
 	
-	_api_register( 'settings()', function () {
+	_api_register( 'settings()', ()=> {
 		return new _Api( this.context, this.context );
 	} );
 	
 	
-	_api_register( 'init()', function () {
+	_api_register( 'init()', ()=> {
 		var ctx = this.context;
 		return ctx.length ? ctx[0].oInit : null;
 	} );
 	
 	
-	_api_register( 'data()', function () {
+	_api_register( 'data()', ()=> {
 		return this.iterator( 'table', function ( settings ) {
 			return _pluck( settings.aoData, '_aData' );
 		} ).flatten();
@@ -9908,7 +9908,7 @@
 		 *
 		 *  @example
 		 *    // Using a 2D array data source
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "data": [
 		 *          ['Trident', 'Internet Explorer 4.0', 'Win 95+', 4, 'X'],
@@ -9926,7 +9926,7 @@
 		 *
 		 *  @example
 		 *    // Using an array of objects as a data source (`data`)
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "data": [
 		 *          {
@@ -10288,7 +10288,7 @@
 		 *  @name DataTable.defaults.autoWidth
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "autoWidth": false
 		 *      } );
@@ -10363,7 +10363,7 @@
 		 *  @name DataTable.defaults.searching
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "searching": false
 		 *      } );
@@ -10383,7 +10383,7 @@
 		 *  @name DataTable.defaults.info
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "info": false
 		 *      } );
@@ -10402,7 +10402,7 @@
 		 *  @name DataTable.defaults.lengthChange
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "lengthChange": false
 		 *      } );
@@ -10420,7 +10420,7 @@
 		 *  @name DataTable.defaults.paging
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "paging": false
 		 *      } );
@@ -10441,7 +10441,7 @@
 		 *  @name DataTable.defaults.processing
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "processing": true
 		 *      } );
@@ -10524,7 +10524,7 @@
 		 *  @name DataTable.defaults.serverSide
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "serverSide": true,
 		 *        "ajax": "xhr.php"
@@ -10544,7 +10544,7 @@
 		 *  @name DataTable.defaults.ordering
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "ordering": false
 		 *      } );
@@ -10564,7 +10564,7 @@
 		 *
 		 *  @example
 		 *    // Disable multiple column sorting ability
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "orderMulti": false
 		 *      } );
@@ -10606,7 +10606,7 @@
 		 *  @name DataTable.defaults.orderClasses
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "orderClasses": false
 		 *      } );
@@ -10631,7 +10631,7 @@
 		 *  @name DataTable.defaults.stateSave
 		 *
 		 *  @example
-		 *    $(document).ready( function () {
+		 *    $(document).ready( ()=> {
 		 *      $('#example').dataTable( {
 		 *        "stateSave": true
 		 *      } );
@@ -11070,7 +11070,7 @@
 		 *            "data": data,
 		 *            "dataType": "json",
 		 *            "method": "POST"
-		 *            "success": function () {}
+		 *            "success": ()=> {}
 		 *          } );
 		 *        }
 		 *      } );
@@ -13729,7 +13729,7 @@
 		 * Get the number of records in the current record set, before filtering
 		 *  @type function
 		 */
-		"fnRecordsTotal": function ()
+		"fnRecordsTotal": ()=>
 		{
 			return _fnDataSource( this ) == 'ssp' ?
 				this._iRecordsTotal * 1 :
@@ -13740,7 +13740,7 @@
 		 * Get the number of records in the current record set, after filtering
 		 *  @type function
 		 */
-		"fnRecordsDisplay": function ()
+		"fnRecordsDisplay": ()=>
 		{
 			return _fnDataSource( this ) == 'ssp' ?
 				this._iRecordsDisplay * 1 :
@@ -13751,7 +13751,7 @@
 		 * Get the display end point - aiDisplay index
 		 *  @type function
 		 */
-		"fnDisplayEnd": function ()
+		"fnDisplayEnd": ()=>
 		{
 			var
 				len      = this._iDisplayLength,
@@ -14972,7 +14972,7 @@
 			};
 		},
 	
-		text: function () {
+		text: ()=> {
 			return {
 				display: __htmlEscapeEntities,
 				filter: __htmlEscapeEntities
@@ -15101,7 +15101,7 @@
 		_fnDataSource: _fnDataSource,
 		_fnRowAttributes: _fnRowAttributes,
 		_fnExtend: _fnExtend,
-		_fnCalculateEnd: function () {} // Used by a lot of plug-ins, but redundant
+		_fnCalculateEnd: ()=> {} // Used by a lot of plug-ins, but redundant
 		                                // in 1.10, so this dead-end function is
 		                                // added to prevent errors
 	} );

@@ -74,23 +74,27 @@
 
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
+            @if( Auth::user()->hasRole('admin'))
             <li class="nav-item active">
                 <a class="nav-link" href="/home">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="customersDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Clientes</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="customersDropdown">
+                @if( Auth::user()->hasRole('admin'))
                     <a class="dropdown-item" href="/customerAdd">Agregar cliente</a>
+                @endif
                     <a class="dropdown-item" href="/customers">Ver clientes</a>
                 </div>
             </li>
-
+            @if( Auth::user()->hasRole('admin'))
             <li class="nav-item">
                 <a class="nav-link" href="/newPurchase" id="agreementsDropdown">
                     <i class="far fa-handshake"></i>
@@ -111,7 +115,7 @@
                     <span>Deposito</span>
                 </a>
             </li>
-
+ @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="listsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-folder"></i>
@@ -120,8 +124,10 @@
                 <div class="dropdown-menu" aria-labelledby="listsDropdown">
                     <h6 class="dropdown-header">Listados:</h6>
                     <a class="dropdown-item" href="PurchaseList">Compra</a>
+                    @if( Auth::user()->hasRole('admin'))
                     <a class="dropdown-item" href="DownPaymentList">Depósito</a>
                     <a class="dropdown-item" href="PawnList">Empeño</a>
+                    @endif
                 </div>
             </li>
         </ul>

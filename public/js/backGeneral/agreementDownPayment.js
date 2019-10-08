@@ -13,14 +13,14 @@ let total = 0;
 var postProducts = "{";
 
 //A la escucha de cambios en los campos de precio y porcentaje
-$("#priceDownPayment").on("change keydown keyup", function () {
+$("#priceDownPayment").on("change keydown keyup", ()=> {
     if($("#priceDownPayment").val() == ""){
         $("#priceDownPayment").val(0);
     }
     $("#priceDownPayment").val($("#priceDownPayment").val()*1.00);
     downPaymentAvise();
 });
-$("#downPaymentPercent").on("change keydown keyup", function () {
+$("#downPaymentPercent").on("change keydown keyup", ()=> {
     downPaymentAvise();
 });
 
@@ -33,7 +33,7 @@ function downPaymentAvise() {
 }
 
 //funcion que recoge los productos para enviarlos
-$("#buttonAddProduct").on("click", function () {
+$("#buttonAddProduct").on("click", ()=> {
     event.preventDefault();
 
     //capturo la imagen del producto
@@ -90,7 +90,7 @@ $("#buttonAddProduct").on("click", function () {
 });
 
 //se encarga de crear el contrato
-$("#buttonAddAgreement").click(function () {
+$("#buttonAddAgreement").click(()=> {
     event.preventDefault();
     //si no esta el cliente le aviso
     if ($("#IDCL").val() == null) {
@@ -156,15 +156,18 @@ $("#buttonAddAgreement").click(function () {
 });
 
 //validador que esta a la espera de que se pueda crear producto para guardarlo
-$("#addProductForm *").on("change keydown keyup", function () {
+$("#addProductForm *").on("change keydown keyup", ()=> {
     if (checkInput("#make") &&
         checkInput("#model") &&
         checkInput("#sn") &&
         checkInputNumber("#priceDownPayment") &&
         checkInputNumber("#downPaymentPercent") &&
         checkInput("#lastDayOfPay") ) {
-        enableSubmit("#buttonAddProduct");
+            enableSubmit("#buttonAddProduct");
     } else {
         disableSubmit("#buttonAddProduct");
     }
 });
+$("#lastDayOfPay").on('change keydown keyup', ()=>{
+    checkInput("#lastDayOfPay")?enableSubmit("#buttonAddProduct"):disableSubmit("#buttonAddProduct");
+})

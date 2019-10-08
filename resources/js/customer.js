@@ -49,7 +49,7 @@ function checkInput(idInput) {
     return $(idInput).val() != "" ? true : false;
 }
 
-(function () {
+(()=> {
     if (!isUserMediaSupport()) {
         alert("Su navegador no acepta la captura de imagenes.");
         $state.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
@@ -105,7 +105,7 @@ function checkInput(idInput) {
                 $video.srcObject = stream;
                 $video.play();
                 
-                $("#addCustomerForm *").on("change keydown", function () {
+                $("#addCustomerForm *").on("change keydown", ()=> {
                     if (checkInput("#names") &&
                         checkInput("#lastname") &&
                         checkInput("#dni") &&
@@ -117,7 +117,7 @@ function checkInput(idInput) {
                     }
                 });
 
-                $buttonCapture.addEventListener("click", function () {
+                $buttonCapture.addEventListener("click", ()=> {
                     event.preventDefault();
                     $video.pause();
                     let contexto = $canvas.getContext("2d");

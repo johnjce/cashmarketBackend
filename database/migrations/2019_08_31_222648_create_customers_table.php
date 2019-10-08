@@ -23,8 +23,8 @@ class CreateCustomersTable extends Migration
             $table->binary('img_dni')->nullable(); 
             $table->string('address'); 
             $table->binary('signaturePicture')->nullable(); 
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

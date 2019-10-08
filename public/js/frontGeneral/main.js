@@ -28,7 +28,7 @@
 	});
 
 
-	$('#dropdown04').on('show.bs.dropdown', function () {
+	$('#dropdown04').on('show.bs.dropdown', ()=> {
 	  console.log('show');
 	});
 
@@ -159,7 +159,7 @@
 
 					$('body .element-animate.item-animate').each(function(k){
 						var el = $(this);
-						setTimeout( function () {
+						setTimeout( ()=> {
 							var effect = el.data('animate-effect');
 							if ( effect === 'fadeIn') {
 								el.addClass('fadeIn element-animated');
