@@ -479,8 +479,8 @@ function clearScreen() {
 function btnOk_Click() {
     setTimeout(close, 0);
     $("#ModalAgreements").modal('show');
-    generateImage();
     SendToSTU();
+    generateImage();
 }
 
 function btnCancel_Click() {
@@ -627,6 +627,7 @@ var usbDevices;
 var tablet;
 
 function SendToSTU() {
+    console.log("SendToSTU");
     var caps;
     var info;
     var pId;
@@ -634,7 +635,6 @@ function SendToSTU() {
     var encodingMode;
     var dataStoreImage;
     var p = new WacomGSS.STU.Protocol();
-    print("SendToSTU");
     connect()
         .then(function(is_connected) {
             console.log(is_connected);

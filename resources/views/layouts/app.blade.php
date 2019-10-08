@@ -214,6 +214,8 @@
                         $('.amount').text(data[0]['pricePurchase'])
                         $('.endTimeToPay').text(data[0]['lastDayOfPay'])
                         $('.created').text(data[0]['created_at'])
+                        
+                        
                         $('.modal-title').text('Contrato de ' + agreementType + '- ' + data[0]['documentId'])
                         $("#signatureImage_" + data[0]['documentId']).attr("src", data[0]['signatureCustomer']);
                         $('.terms').text("");
@@ -228,33 +230,33 @@
                             "        <th>Estado de<br />producto</th>" +
                             "        <th>Precio unidad</th>" +
                             "        <th>";
-                        documento += data[0]['stock'] == null ? "Porcentaje" : "Cantidad";
-                        documento += "</th>" +
+                            documento += data[0]['stock'] == null ? "Porcentaje" : "Cantidad";
+                            documento += "</th>" +
                             "        <th>Total</th>" +
                             "    </tr>";
-                        let key = 0;
-                        let total = intereses = prestado = 0;
-                        data.forEach(product => {
-                            key++;
-                            documento += " <tr><td>" + key + "</td>" +
+                            let key = 0;
+                            let total = intereses = prestado = 0;
+                            data.forEach(product => {
+                                key++;
+                                documento += " <tr><td>" + key + "</td>" +
                                 "<td>" + product.make + "</td>" +
                                 "<td>" + product.model + "</td>" +
                                 "<td>" + product.sn + "</td>";
-
-                            let productPrice = product.pricePurchase == null ? product.pricePawn : product.pricePurchase;
-                            let productStock = product.stock == null ? product.pawnPercent : product.stock;
-                            intereses += parseFloat(productStock * productPrice / 100, 2);
+                                
+                                let productPrice = product.pricePurchase == null ? product.pricePawn : product.pricePurchase;
+                                let productStock = product.stock == null ? product.pawnPercent : product.stock;
+                                intereses += parseFloat(productStock * productPrice / 100, 2);
                             prestado += parseFloat(productPrice, 2);
                             let state = product.productState == 1 ? "Nuevo" : "Segundamano";
                             let sSymbol = product.stock == null ? "%" : "";
                             documento += "<td>" + state + "</td>" +
-                                "        <td>" + productPrice + "&euro;</td>" +
+                            "        <td>" + productPrice + "&euro;</td>" +
                                 "        <td>" + productStock + sSymbol + "</td>";
-
-                            productPrice = product.pricePawn == null ? parseFloat(productStock * productPrice, 2) : parseFloat(productStock * productPrice / 100, 2) + parseFloat(product.pricePawn == null ? 0 : product.pricePawn, 2);
-                            documento += "    <td>" + productPrice + "&euro;</td>";
-                            total += parseFloat(productPrice, 2);
-                            documento += "</tr>";
+                                
+                                productPrice = product.pricePawn == null ? parseFloat(productStock * productPrice, 2) : parseFloat(productStock * productPrice / 100, 2) + parseFloat(product.pricePawn == null ? 0 : product.pricePawn, 2);
+                                documento += "    <td>" + productPrice + "&euro;</td>";
+                                total += parseFloat(productPrice, 2);
+                                documento += "</tr>";
                             $('.terms').append(product.terms + ", ");
                         });
                         documento += "</table>" + "<br/>";
@@ -262,6 +264,7 @@
                         $('.total').text(parseFloat(total, 2));
                         $('.priceObjects').text(parseFloat(prestado, 2));
                         $('.priceInterest').text(parseFloat(intereses, 2));
+                        $(".signatureImage").attr('src',data[0]['signatureCustomer']);
                     }
                 },
                 error: function(jqXhr, textStatus, errorThrown) {

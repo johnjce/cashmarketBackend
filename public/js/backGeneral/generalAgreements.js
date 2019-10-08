@@ -18,7 +18,7 @@ function disableSubmit(idButton) {
 }
 
 function checkInput(idInput) {
-    return $(idInput).val() != "" ? true : false;
+    return $(idInput).val() != "";
 }
 
 function checkInputNumber(idInput) {

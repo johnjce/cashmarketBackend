@@ -161,7 +161,8 @@ $("#addProductForm *").on("change keydown keyup", function () {
         checkInput("#model") &&
         checkInput("#sn") &&
         checkInputNumber("#priceDownPayment") &&
-        checkInputNumber("#downPaymentPercent")) {
+        checkInputNumber("#downPaymentPercent") &&
+        checkInput("#lastDayOfPay") ) {
         enableSubmit("#buttonAddProduct");
     } else {
         disableSubmit("#buttonAddProduct");

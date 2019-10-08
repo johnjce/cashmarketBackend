@@ -13,12 +13,12 @@
     <p id="message">Los campos marcados con (*) significan que son obligatorios.</p>
     <div class="row py-2 text-left">
         <div class="input-group col-12">
-            <input type="text" id="inputSearch" class="search-query form-control" placeholder="Buscar Cliente">
-            <span class="input-group-btn">
+            <span class="input-group-btn input-group-prepend">
                 <button class="btn btn-primary" type="button">
                     <i class="fas fa-search"></i>
                 </button>
             </span>
+            <input type="text" id="inputSearch" class="search-query form-control" placeholder="Buscar Cliente">
         </div>
         <div id="customersResult"></div>
     </div>
@@ -177,6 +177,9 @@
         </div>
     </div>
 </div>
+
+<img id="idImg" style="width:0pt;" src="{{ secure_asset('images/logotablet.jpg') }}" />
+
 @include('modals.agreementDownPayment')
 @endsection
 
@@ -197,7 +200,7 @@
         language: "es",
         autoclose: true
     });
-    </script>
+</script>
 @endsection
 
 @section('scriptsFirma')
@@ -214,7 +217,7 @@
 <script src="{{ secure_asset('js/backGeneral/signatureControl.js') }}" defer></script>
 
 <script>
-function printDocument(aaa) {
+    function printDocument(aaa) {
         var ventana = window.open("", "", "");
         var contenido = "<head>" +
             "<link href='https://cashmarkets.es/css/backGeneral/sb-admin.css' rel='stylesheet'>" +

@@ -113,7 +113,7 @@
                 <div class='row'>
                     <div class='col-md-6'>
                         <div id='signatureDiv'>
-                            <img id='signatureImage' height='150px' width='300px' src='https://cashmarkets.es/img/firma-digital.png' /><br />
+                            <img id='signatureImage' class='signatureImage' height='150px' width='300px' src='https://cashmarkets.es/img/firma-digital.png' /><br />
                             Firma:. <label class="names"></label><br />
                         </div>
                     </div>
