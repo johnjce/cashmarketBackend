@@ -1,14 +1,53 @@
+# CODE
+#=====
+*.code-workspace
+
+# IDEA
+#=====
+.idea
+
+# OSX
+# ===
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+#===========
+._*
+
+# Files that might appear in the root of a volume
+#================================================
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+#====================================================
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.pdf
+
+# Laravel
+#========
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
 .env
+.env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/vendor
 vendor/composer/autoload_real.php
 vendor/autoload.php
 vendor/composer/autoload_classmap.php
@@ -19,3 +58,10 @@ vendor/composer/autoload_static.php
 vendor/composer/ClassLoader.php
 vendor/composer/installed.json
 vendor/composer/LICENSE
+
+# Nuxtjs
+#=======
+.nuxt
+/dist
+/public/_nuxt
+

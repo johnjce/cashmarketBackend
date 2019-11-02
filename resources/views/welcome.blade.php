@@ -82,7 +82,6 @@
 
     </section>
     <!-- END slider -->
-    </div>
 
     <footer class="site-footer" role="contentinfo">
         <div class="container">
@@ -138,7 +137,7 @@
     <script src="js/frontGeneral/jquery.waypoints.min.js"></script>
     <script src="js/frontGeneral/jquery.fancybox.min.js"></script>
     <script src="js/frontGeneral/main.js"></script>
-    
+
 </body>
 
 </html>
